@@ -281,64 +281,45 @@
         </div>
       </div>
     </section>
-
     <section class="panel">
       <h2 id="warningTitle" class="section-title">Important Note for Students</h2>
       <div id="warningText" class="warning">
         Use AI for understanding, revision, and practice. Don’t just copy and paste. Always check formulas, definitions, and important facts with your textbook or teacher.
       </div>
     </section>
+<section class="panel">
+<h2>Scholarship Test Registration</h2>
 
-    <section class="panel">
-      <h2 id="formTitle" class="section-title">Scholarship Test Registration</h2>
-      <p id="formSubtitle" class="section-subtitle">Students can register here for scholarship aptitude test details. Responses will go to Google Form and Google Sheet.</p>
+<form action="https://docs.google.com/forms/d/e/1FAIpQLSdZyusli8aoJXrvs64VFisowlYFrrsvl9Q1BI1mOsGtiQfOnQ/formResponse"
+method="POST" target="_blank">
 
-      <form id="registrationForm">
-        <div class="grid">
-          <div>
-            <label id="labelName" for="name">Student Name</label>
-            <input type="text" id="name" required />
-          </div>
-          <div>
-            <label id="labelSchool" for="school">School Name</label>
-            <input type="text" id="school" required />
-          </div>
-          <div>
-            <label id="labelMedium" for="medium">Medium</label>
-            <select id="medium" required>
-              <option value="">Select</option>
-              <option value="English Medium">English Medium</option>
-              <option value="Tamil Medium">Tamil Medium</option>
-            </select>
-          </div>
-          <div>
-            <label id="labelPhone" for="phone">Mobile Number</label>
-            <input type="tel" id="phone" required />
-          </div>
-          <div>
-            <label id="labelGroup" for="group">Group / Stream</label>
-            <input type="text" id="group" placeholder="Bio-Maths / Computer Science / Commerce" />
-          </div>
-          <div>
-            <label id="labelDistrict" for="district">District</label>
-            <input type="text" id="district" />
-          </div>
-        </div>
+<label>Student Name</label>
+<input name="entry.983033617" required>
 
-        <div style="margin-top:14px;">
-          <label id="labelMessage" for="message">Message / Interest</label>
-          <textarea id="message" placeholder="I want scholarship test details..."></textarea>
-        </div>
+<label>School Name</label>
+<input name="entry.801039746" required>
 
-        <div class="btn-row" style="margin-top:16px;">
-          <button class="btn btn-primary" type="submit" id="submitBtn">Register Now</button>
-          <button class="btn btn-secondary" type="reset" id="resetBtn">Reset</button>
-          <a class="btn btn-secondary" id="openGoogleFormBtn" href="#" target="_blank">Open Google Form</a>
-        </div>
+<label>Medium</label>
+<select name="entry.1294393761" required>
+<option>English</option>
+<option>Tamil</option>
+</select>
 
-        <div id="formStatus" class="status"></div>
-      </form>
-    </section>
+<label>Mobile Number</label>
+<input name="entry.682366574" required>
+
+<label>Group</label>
+<input name="entry.2031149044">
+
+<label>District</label>
+<input name="entry.2144771428">
+
+<br><br>
+
+<button type="submit">Register Now</button>
+
+</form>
+</section>
   </main>
 
   <footer>
@@ -348,8 +329,8 @@
   </footer>
 
   <script>
-    const GOOGLE_FORM_ACTION = "YOUR_GOOGLE_FORM_RESPONSE_URL";
-    const GOOGLE_FORM_VIEW = "YOUR_GOOGLE_FORM_VIEW_URL";
+    const GOOGLE_FORM_ACTION = "https://forms.gle/ADNcb8RGTJT57Yde8";
+    const GOOGLE_FORM_VIEW = "https://docs.google.com/forms/d/e/1FAIpQLSdZyusli8aoJXrvs64VFisowlYFrrsvl9Q1BI1mOsGtiQfOnQ/viewform";
 
     const FORM_FIELDS = {
       name: "entry.1111111111",
