@@ -3,179 +3,113 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Study Hub for +2 Students</title>
+  <title>AEC AI Study Hub</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-
+    * { box-sizing: border-box; }
     body {
-      background: linear-gradient(135deg, #eef4ff, #f8f3ff, #fffaf0);
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #eef4ff, #f9f5ff, #fffaf2);
       color: #1f2937;
     }
-
-    header {
+    .header {
       background: linear-gradient(135deg, #0f172a, #1d4ed8, #7c3aed);
       color: white;
-      padding: 18px 14px 36px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      padding: 16px;
     }
-
-    .topbar {
+    .top-row {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-bottom: 14px;
     }
-
-    .lang-switch {
-      display: flex;
-      gap: 8px;
-      background: rgba(255,255,255,0.15);
-      padding: 6px;
-      border-radius: 999px;
-    }
-
-    .lang-switch button {
+    .lang-btn {
       border: none;
-      padding: 8px 16px;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      padding: 10px 16px;
       border-radius: 999px;
       cursor: pointer;
-      background: transparent;
-      color: white;
       font-weight: bold;
     }
-
-    .lang-switch button.active {
+    .lang-btn.active {
       background: white;
-      color: #2563eb;
+      color: #1d4ed8;
     }
-
-    .title-row {
+    .brand {
       display: grid;
-      grid-template-columns: 90px 1fr 160px;
-      gap: 16px;
+      grid-template-columns: 90px 1fr 170px;
       align-items: center;
-      margin-top: 24px;
+      gap: 12px;
     }
-
-    .left-logo-box,
-    .right-logo-box {
+    .brand-center { text-align: center; }
+    .brand-title {
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin: 0;
+    }
+    .brand-sub {
+      margin-top: 8px;
+      font-size: 18px;
+      opacity: 0.95;
+    }
+    .logo-box, .accreditation-box {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
       flex-wrap: wrap;
     }
-
-    .left-logo-box img,
-    .right-logo-box img {
+    .logo-box img, .accreditation-box img {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
       background: white;
       border-radius: 14px;
       padding: 6px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-      object-fit: contain;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
     }
-
-    .left-logo-box img {
-      width: 78px;
-      height: 78px;
-    }
-
-    .right-logo-box img {
-      width: 68px;
-      height: 68px;
-    }
-
-    .college-title-wrap {
+    .creator {
+      max-width: 780px;
+      margin: 18px auto 0;
       text-align: center;
-    }
-
-    .college-title {
-      font-size: 2.25rem;
-      font-weight: 800;
-      line-height: 1.2;
-      letter-spacing: 0.3px;
-      color: #ffffff;
-      text-shadow: 0 3px 8px rgba(0,0,0,0.18);
-    }
-
-    .college-sub {
-      margin-top: 8px;
-      font-size: 1rem;
-      opacity: 0.96;
-      line-height: 1.6;
-    }
-
-    .creator-box {
-      margin: 22px auto 0;
-      max-width: 620px;
       background: rgba(255,255,255,0.14);
-      padding: 16px;
-      border-radius: 18px;
-      line-height: 1.8;
-      text-align: center;
-      font-size: 0.98rem;
+      border-radius: 16px;
+      padding: 14px;
+      line-height: 1.7;
     }
-
-    .section {
+    .container {
       width: min(1150px, 94%);
-      margin: 34px auto;
+      margin: 26px auto;
     }
-
     .section-title {
       text-align: center;
-      font-size: 2rem;
-      margin-bottom: 10px;
+      font-size: 30px;
+      margin: 0 0 8px;
       color: #0f172a;
     }
-
     .section-subtitle {
       text-align: center;
       color: #475569;
       max-width: 920px;
-      margin: 0 auto 24px;
+      margin: 0 auto 22px;
       line-height: 1.7;
-      font-size: 1rem;
     }
-
-    .task-grid {
+    .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
+      gap: 18px;
     }
-
     .card {
-      background: rgba(255,255,255,0.95);
+      background: rgba(255,255,255,0.96);
       border-radius: 22px;
-      padding: 20px;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.08);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      padding: 18px;
+      box-shadow: 0 10px 24px rgba(15,23,42,0.08);
     }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 14px 30px rgba(0,0,0,0.12);
-    }
-
-    .card h3 {
-      margin-bottom: 10px;
-      font-size: 1.2rem;
-      color: #0f172a;
-    }
-
-    .card p {
-      color: #475569;
-      line-height: 1.65;
-      margin-bottom: 12px;
-      font-size: 0.96rem;
-    }
-
-    .tool-tag {
+    .card h3 { margin: 0 0 10px; }
+    .card p { margin: 0 0 12px; color: #475569; line-height: 1.6; }
+    .tag {
       display: inline-block;
       background: #e0e7ff;
       color: #3730a3;
@@ -185,289 +119,192 @@
       font-weight: bold;
       margin-bottom: 12px;
     }
-
-    .prompt-box {
+    .prompt {
       background: #f8fafc;
       border-left: 4px solid #7c3aed;
-      padding: 12px;
       border-radius: 12px;
+      padding: 12px;
+      min-height: 90px;
       margin-bottom: 12px;
       line-height: 1.6;
       font-size: 14px;
-      min-height: 90px;
     }
-
     .btn-row {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
-
     .btn {
       border: none;
-      cursor: pointer;
-      padding: 10px 14px;
       border-radius: 10px;
+      padding: 10px 14px;
       font-weight: bold;
+      cursor: pointer;
       text-decoration: none;
       display: inline-block;
-      font-size: 0.93rem;
     }
-
     .btn-primary {
       background: linear-gradient(135deg, #2563eb, #7c3aed);
       color: white;
     }
-
     .btn-secondary {
       background: #e2e8f0;
       color: #0f172a;
     }
-
-    .btn-danger {
-      background: #dc2626;
-      color: white;
+    .panel {
+      background: white;
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 10px 24px rgba(15,23,42,0.08);
+      margin-top: 24px;
     }
-
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    label { font-weight: bold; font-size: 14px; }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+    textarea { min-height: 100px; resize: vertical; }
     .info-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 18px;
     }
-
     .info-card {
       background: white;
       padding: 20px;
       border-radius: 18px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      box-shadow: 0 8px 20px rgba(15,23,42,0.06);
     }
-
-    .info-card h4 {
-      margin-bottom: 10px;
-      color: #0f172a;
-    }
-
-    .info-card ul {
-      padding-left: 18px;
-      line-height: 1.8;
-      color: #475569;
-    }
-
-    .warning-box {
+    .info-card h4 { margin: 0 0 10px; }
+    .info-card ul { margin: 0; padding-left: 18px; line-height: 1.8; color: #475569; }
+    .warning {
       background: #fff7ed;
       border-left: 5px solid #f59e0b;
-      padding: 18px;
       border-radius: 12px;
-      line-height: 1.8;
+      padding: 18px;
+      line-height: 1.7;
       color: #7c2d12;
     }
-
-    .form-wrap,
-    .admin-wrap {
-      background: white;
-      padding: 24px;
-      border-radius: 22px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    .status {
+      margin-top: 12px;
+      font-weight: bold;
+      color: #166534;
     }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 10px;
-      margin-top: 6px;
-      font-size: 0.96rem;
-    }
-
-    textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-
-    .form-actions,
-    .admin-actions {
-      margin-top: 16px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .admin-login-box {
-      max-width: 420px;
-      margin: 0 auto;
-    }
-
-    .admin-table-wrap {
-      overflow-x: auto;
-      margin-top: 18px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 900px;
-    }
-
-    th, td {
-      border: 1px solid #e2e8f0;
-      padding: 10px;
-      text-align: left;
-      vertical-align: top;
-      font-size: 0.92rem;
-    }
-
-    th {
-      background: #eff6ff;
-      color: #1e3a8a;
-    }
-
-    .hidden {
-      display: none;
-    }
-
     footer {
       background: #0f172a;
       color: #e2e8f0;
       text-align: center;
       padding: 24px 12px;
-      margin-top: 40px;
+      margin-top: 36px;
       line-height: 1.8;
     }
-
     @media (max-width: 900px) {
-      .title-row {
-        grid-template-columns: 1fr;
-      }
-
-      .college-title {
-        font-size: 1.6rem;
-      }
-
-      .left-logo-box, .right-logo-box {
-        justify-content: center;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .section-title { font-size: 1.5rem; }
-      .college-title { font-size: 1.4rem; }
+      .brand { grid-template-columns: 1fr; }
+      .brand-title { font-size: 26px; }
+      .brand-sub { font-size: 16px; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="topbar">
-      <div></div>
-      <div class="lang-switch">
-        <button id="btn-en" class="active" type="button">English</button>
-        <button id="btn-ta" type="button">தமிழ்</button>
+  <header class="header">
+    <div class="top-row">
+      <button id="btn-en" class="lang-btn active" type="button">English</button>
+      <button id="btn-ta" class="lang-btn" type="button">தமிழ்</button>
+    </div>
+
+    <div class="brand">
+      <div class="logo-box">
+        <img src="college-logo.png" alt="College Logo" onerror="this.style.display='none'">
+      </div>
+
+      <div class="brand-center">
+        <h1 id="collegeTitle" class="brand-title">Annapoorana Engineering College</h1>
+        <div id="collegeSubtitle" class="brand-sub">(An Autonomous Institution), Salem</div>
+      </div>
+
+      <div class="accreditation-box">
+        <img src="naac-logo.png" alt="NAAC Logo" onerror="this.style.display='none'">
+        <img src="nba-logo.png" alt="NBA Logo" onerror="this.style.display='none'">
       </div>
     </div>
 
-    <div class="title-row">
-      <div class="left-logo-box">
-        <img src="college-logo.png" alt="College Logo">
-      </div>
-
-      <div class="college-title-wrap">
-        <div class="college-title" id="collegeMainTitle">
-          Annapoorana Engineering College
-        </div>
-        <div class="college-sub" id="collegeSubTitle">
-          (An Autonomous Institution), Salem
-        </div>
-      </div>
-
-      <div class="right-logo-box">
-        <img src="naac-logo.png" alt="NAAC Logo">
-        <img src="nba-logo.png" alt="NBA Logo">
-      </div>
-    </div>
-
-    <div class="creator-box" id="creatorBox">
+    <div id="creatorBox" class="creator">
       <strong>Website Created By:</strong> Prof.B.Nandhagopal, AP/Civil<br>
       <strong>Contact No.:</strong> +91 8072813033<br>
       <strong>Email:</strong> bnandhagopal@aecsalem.edu.in
     </div>
   </header>
 
-  <section class="section">
-    <h2 class="section-title" id="heroTitle">AI Study Hub for +2 Students</h2>
-    <p class="section-subtitle" id="heroSubtitle">
-      Choose what you want to do, copy the ready prompt, and open the correct AI tool instantly.
-    </p>
-    <div class="task-grid" id="taskGrid"></div>
-  </section>
+  <main class="container">
+    <section>
+      <h2 id="heroTitle" class="section-title">AI Study Hub for +2 Students</h2>
+      <p id="heroSubtitle" class="section-subtitle">Choose what you want to do, copy the ready prompt, and open the correct AI tool instantly.</p>
+      <div id="cards" class="cards"></div>
+    </section>
 
-  <section class="section">
-    <h2 class="section-title" id="whyTitle">Why this is useful</h2>
-    <p class="section-subtitle" id="whySubtitle">
-      This is specially made for +2 students who are preparing for board exams.
-    </p>
-
-    <div class="info-grid">
-      <div class="info-card">
-        <h4 id="benefit1Title">Quick Revision</h4>
-        <ul id="benefit1List">
-          <li>Big lessons can become short notes</li>
-          <li>Difficult topics can be revised quickly</li>
-          <li>Can understand in simple English or spoken Tamil</li>
-        </ul>
+    <section class="panel">
+      <h2 id="whyTitle" class="section-title">Why this is useful</h2>
+      <p id="whySubtitle" class="section-subtitle">This is specially made for +2 students who are preparing for board exams.</p>
+      <div class="info-grid">
+        <div class="info-card">
+          <h4 id="benefit1Title">Quick Revision</h4>
+          <ul id="benefit1List">
+            <li>Big lessons can become short notes</li>
+            <li>Difficult topics can be revised quickly</li>
+            <li>Can understand in simple English or spoken Tamil</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4 id="benefit2Title">Better Practice</h4>
+          <ul id="benefit2List">
+            <li>Create MCQs and important questions</li>
+            <li>Prepare better structured answers</li>
+            <li>Make slides, mind maps, and visuals</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4 id="benefit3Title">Smart Use of AI</h4>
+          <ul id="benefit3List">
+            <li>Learn how to ask properly</li>
+            <li>Use AI for understanding, not blind copying</li>
+            <li>Study with textbook and class notes</li>
+          </ul>
+        </div>
       </div>
+    </section>
 
-      <div class="info-card">
-        <h4 id="benefit2Title">Better Practice</h4>
-        <ul id="benefit2List">
-          <li>Create MCQs and important questions</li>
-          <li>Prepare better structured answers</li>
-          <li>Make slides, mind maps, and visuals</li>
-        </ul>
+    <section class="panel">
+      <h2 id="warningTitle" class="section-title">Important Note for Students</h2>
+      <div id="warningText" class="warning">
+        Use AI for understanding, revision, and practice. Don’t just copy and paste. Always check formulas, definitions, and important facts with your textbook or teacher.
       </div>
+    </section>
 
-      <div class="info-card">
-        <h4 id="benefit3Title">Smart Use of AI</h4>
-        <ul id="benefit3List">
-          <li>Learn how to ask properly</li>
-          <li>Use AI for understanding, not blind copying</li>
-          <li>Study along with textbook and class notes</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2 class="section-title" id="warningTitle">Important Note for Students</h2>
-    <div class="warning-box" id="warningText">
-      Use AI for understanding, revision, and practice. Don’t just copy and paste. Always check formulas, definitions, and important facts with your textbook or teacher.
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="form-wrap">
-      <h2 class="section-title" id="formTitle">Scholarship Test Registration</h2>
-      <p class="section-subtitle" id="formSubtitle">
-        Students can register here for scholarship aptitude test details.
-      </p>
+    <section class="panel">
+      <h2 id="formTitle" class="section-title">Scholarship Test Registration</h2>
+      <p id="formSubtitle" class="section-subtitle">Students can register here for scholarship aptitude test details. Responses will go to Google Form and Google Sheet.</p>
 
       <form id="registrationForm">
-        <div class="form-grid">
+        <div class="grid">
           <div>
-            <label id="labelName">Student Name</label>
-            <input type="text" id="name" required>
+            <label id="labelName" for="name">Student Name</label>
+            <input type="text" id="name" required />
           </div>
           <div>
-            <label id="labelSchool">School Name</label>
-            <input type="text" id="school" required>
+            <label id="labelSchool" for="school">School Name</label>
+            <input type="text" id="school" required />
           </div>
           <div>
-            <label id="labelMedium">Medium</label>
+            <label id="labelMedium" for="medium">Medium</label>
             <select id="medium" required>
               <option value="">Select</option>
               <option value="English Medium">English Medium</option>
@@ -475,74 +312,34 @@
             </select>
           </div>
           <div>
-            <label id="labelPhone">Mobile Number</label>
-            <input type="tel" id="phone" required>
+            <label id="labelPhone" for="phone">Mobile Number</label>
+            <input type="tel" id="phone" required />
           </div>
           <div>
-            <label id="labelGroup">Group / Stream</label>
-            <input type="text" id="group" placeholder="Bio-Maths / Computer Science / Commerce">
+            <label id="labelGroup" for="group">Group / Stream</label>
+            <input type="text" id="group" placeholder="Bio-Maths / Computer Science / Commerce" />
           </div>
           <div>
-            <label id="labelDistrict">District</label>
-            <input type="text" id="district">
+            <label id="labelDistrict" for="district">District</label>
+            <input type="text" id="district" />
           </div>
         </div>
 
         <div style="margin-top:14px;">
-          <label id="labelMessage">Message / Interest</label>
+          <label id="labelMessage" for="message">Message / Interest</label>
           <textarea id="message" placeholder="I want scholarship test details..."></textarea>
         </div>
 
-        <div class="form-actions">
+        <div class="btn-row" style="margin-top:16px;">
           <button class="btn btn-primary" type="submit" id="submitBtn">Register Now</button>
           <button class="btn btn-secondary" type="reset" id="resetBtn">Reset</button>
-          <button class="btn btn-secondary" type="button" id="adminOpenBtn">Admin Login</button>
+          <a class="btn btn-secondary" id="openGoogleFormBtn" href="#" target="_blank">Open Google Form</a>
         </div>
+
+        <div id="formStatus" class="status"></div>
       </form>
-    </div>
-  </section>
-
-  <section class="section hidden" id="adminSection">
-    <div class="admin-wrap">
-      <h2 class="section-title" id="adminTitle">Admin Panel</h2>
-
-      <div class="admin-login-box" id="adminLoginBox">
-        <label id="adminPasswordLabel">Enter Admin Password</label>
-        <input type="password" id="adminPassword" placeholder="Enter password">
-        <div class="admin-actions">
-          <button class="btn btn-primary" type="button" id="adminLoginBtn">Login</button>
-          <button class="btn btn-secondary" type="button" id="adminCloseBtn">Close</button>
-        </div>
-      </div>
-
-      <div class="hidden" id="adminDataBox">
-        <div class="admin-actions">
-          <button class="btn btn-secondary" type="button" id="refreshAdminBtn">Refresh</button>
-          <button class="btn btn-danger" type="button" id="clearAllBtn">Clear All</button>
-          <button class="btn btn-secondary" type="button" id="logoutAdminBtn">Logout</button>
-        </div>
-
-        <div class="admin-table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>S.No</th>
-                <th>Name</th>
-                <th>School</th>
-                <th>Medium</th>
-                <th>Phone</th>
-                <th>Group</th>
-                <th>District</th>
-                <th>Message</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody id="adminTableBody"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <footer>
     <div id="footerCollege">Annapoorana Engineering College (An Autonomous Institution), Salem</div>
@@ -551,7 +348,18 @@
   </footer>
 
   <script>
-    const ADMIN_PASSWORD = "AEC2026";
+    const GOOGLE_FORM_ACTION = "YOUR_GOOGLE_FORM_RESPONSE_URL";
+    const GOOGLE_FORM_VIEW = "YOUR_GOOGLE_FORM_VIEW_URL";
+
+    const FORM_FIELDS = {
+      name: "entry.1111111111",
+      school: "entry.2222222222",
+      medium: "entry.3333333333",
+      phone: "entry.4444444444",
+      group: "entry.5555555555",
+      district: "entry.6666666666",
+      message: "entry.7777777777"
+    };
 
     const toolsData = {
       en: [
@@ -601,21 +409,21 @@
       ta: [
         {
           title: "Notes செய்ய",
-          desc: "ஒரு lesson-ku quick-ah short notes வேணும்னா இதைப் use பண்ணலாம்.",
+          desc: "Oru lesson-ku quick-ah short notes வேணும்னா இதைப் use பண்ணலாம்.",
           tool: "ChatGPT",
           prompt: "Electrochemistry lesson-ku easy-a short board exam notes prepare pannunga.",
           url: "https://chatgpt.com/"
         },
         {
           title: "Already இருக்கும் notes-லிருந்து notes செய்ய",
-          desc: "உங்க class notes அல்லது PDF இருந்தா அதுலிருந்து neat-a revision notes செய்யலாம்.",
+          desc: "Unga class notes அல்லது PDF இருந்தா அதுலிருந்து neat-a revision notes செய்யலாம்.",
           tool: "NotebookLM",
           prompt: "Indha uploaded notes use panni neat-a board exam revision notes create pannunga.",
           url: "https://notebooklm.google.com/"
         },
         {
           title: "Mind Map செய்ய",
-          desc: "ஒரு chapter easy-a நினைவில் வைக்க mind map use பண்ணலாம்.",
+          desc: "Oru chapter easy-a நினைவில் வைக்க mind map use பண்ணலாம்.",
           tool: "Napkin AI",
           prompt: "Reproductive Health chapter-ku simple mind map create pannunga.",
           url: "https://www.napkin.ai/"
@@ -629,7 +437,7 @@
         },
         {
           title: "Video Presentation செய்ய",
-          desc: "ஒரு lesson visual-a புரிஞ்சுக்கணும்னா இது help ஆகும்.",
+          desc: "Oru lesson visual-a புரிஞ்சுக்கணும்னா இது help ஆகும்.",
           tool: "NotebookLM",
           prompt: "Indha chapter-ku short revision video overview create pannunga.",
           url: "https://notebooklm.google.com/"
@@ -645,55 +453,38 @@
     };
 
     let currentLang = "en";
-    let adminLoggedIn = false;
-
-    function getRegistrations() {
-      return JSON.parse(localStorage.getItem("aec_registrations") || "[]");
-    }
-
-    function saveRegistrations(data) {
-      localStorage.setItem("aec_registrations", JSON.stringify(data));
-    }
 
     function renderCards() {
-      const taskGrid = document.getElementById("taskGrid");
-      taskGrid.innerHTML = "";
-
-      toolsData[currentLang].forEach((item, index) => {
+      const cards = document.getElementById("cards");
+      cards.innerHTML = "";
+      toolsData[currentLang].forEach((item, i) => {
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
           <h3>${item.title}</h3>
           <p>${item.desc}</p>
-          <div class="tool-tag">${item.tool}</div>
-          <div class="prompt-box" id="prompt-${index}">${item.prompt}</div>
+          <div class="tag">${item.tool}</div>
+          <div class="prompt" id="prompt-${i}">${item.prompt}</div>
           <div class="btn-row">
-            <button class="btn btn-secondary" type="button" onclick="copyPrompt('prompt-${index}')">
-              ${currentLang === "en" ? "Copy Prompt" : "Prompt copy பண்ணு"}
-            </button>
-            <a class="btn btn-primary" href="${item.url}" target="_blank">
-              ${currentLang === "en" ? "Open Tool" : "Tool open பண்ணு"}
-            </a>
+            <button class="btn btn-secondary" type="button" onclick="copyPrompt('prompt-${i}')">${currentLang === "en" ? "Copy Prompt" : "Prompt copy பண்ணு"}</button>
+            <a class="btn btn-primary" href="${item.url}" target="_blank" rel="noopener noreferrer">${currentLang === "en" ? "Open Tool" : "Tool open பண்ணு"}</a>
           </div>
         `;
-        taskGrid.appendChild(card);
+        cards.appendChild(card);
       });
     }
 
     function copyPrompt(id) {
       const text = document.getElementById(id).innerText;
-      navigator.clipboard.writeText(text)
-        .then(function () {
-          alert(currentLang === "en" ? "Prompt copied!" : "Prompt copy ஆயிடுச்சு!");
-        })
-        .catch(function () {
-          alert(currentLang === "en" ? "Copy failed" : "Copy ஆகலை");
-        });
+      navigator.clipboard.writeText(text).then(() => {
+        alert(currentLang === "en" ? "Prompt copied!" : "Prompt copy ஆயிடுச்சு!");
+      }).catch(() => {
+        alert(currentLang === "en" ? "Copy failed" : "Copy ஆகலை");
+      });
     }
 
     function setLanguage(lang) {
       currentLang = lang;
-
       document.getElementById("btn-en").classList.toggle("active", lang === "en");
       document.getElementById("btn-ta").classList.toggle("active", lang === "ta");
 
@@ -703,4 +494,112 @@
         document.getElementById("whyTitle").innerText = "Why this is useful";
         document.getElementById("whySubtitle").innerText = "This is specially made for +2 students who are preparing for board exams.";
         document.getElementById("benefit1Title").innerText = "Quick Revision";
-        document.getEl
+        document.getElementById("benefit1List").innerHTML = "<li>Big lessons can become short notes</li><li>Difficult topics can be revised quickly</li><li>Can understand in simple English or spoken Tamil</li>";
+        document.getElementById("benefit2Title").innerText = "Better Practice";
+        document.getElementById("benefit2List").innerHTML = "<li>Create MCQs and important questions</li><li>Prepare better structured answers</li><li>Make slides, mind maps, and visuals</li>";
+        document.getElementById("benefit3Title").innerText = "Smart Use of AI";
+        document.getElementById("benefit3List").innerHTML = "<li>Learn how to ask properly</li><li>Use AI for understanding, not blind copying</li><li>Study with textbook and class notes</li>";
+        document.getElementById("warningTitle").innerText = "Important Note for Students";
+        document.getElementById("warningText").innerText = "Use AI for understanding, revision, and practice. Don’t just copy and paste. Always check formulas, definitions, and important facts with your textbook or teacher.";
+        document.getElementById("formTitle").innerText = "Scholarship Test Registration";
+        document.getElementById("formSubtitle").innerText = "Students can register here for scholarship aptitude test details. Responses will go to Google Form and Google Sheet.";
+        document.getElementById("labelName").innerText = "Student Name";
+        document.getElementById("labelSchool").innerText = "School Name";
+        document.getElementById("labelMedium").innerText = "Medium";
+        document.getElementById("labelPhone").innerText = "Mobile Number";
+        document.getElementById("labelGroup").innerText = "Group / Stream";
+        document.getElementById("labelDistrict").innerText = "District";
+        document.getElementById("labelMessage").innerText = "Message / Interest";
+        document.getElementById("submitBtn").innerText = "Register Now";
+        document.getElementById("resetBtn").innerText = "Reset";
+        document.getElementById("openGoogleFormBtn").innerText = "Open Google Form";
+      } else {
+        document.getElementById("heroTitle").innerText = "+2 Students-kana AI Study Hub";
+        document.getElementById("heroSubtitle").innerText = "Enna செய்யணுமோ அதை choose பண்ணுங்க, ready prompt-a copy பண்ணி correct tool-a open பண்ணுங்க.";
+        document.getElementById("whyTitle").innerText = "Ithu eppadi useful";
+        document.getElementById("whySubtitle").innerText = "Board exam prepare பண்ணுற +2 students-kaga தான் இது specially செய்யப்பட்டுள்ளது.";
+        document.getElementById("benefit1Title").innerText = "Quick Revision";
+        document.getElementById("benefit1List").innerHTML = "<li>Periya lessons short notes ஆக மாறும்</li><li>Kashtamana topics quick-ah revise பண்ணலாம்</li><li>Easy English அல்லது spoken Tamil-la purinjukkalam</li>";
+        document.getElementById("benefit2Title").innerText = "Better Practice";
+        document.getElementById("benefit2List").innerHTML = "<li>MCQ மற்றும் important questions செய்யலாம்</li><li>Better answer structure prepare பண்ணலாம்</li><li>Slides, mind map, visuals செய்யலாம்</li>";
+        document.getElementById("benefit3Title").innerText = "Smart AI Use";
+        document.getElementById("benefit3List").innerHTML = "<li>Correct-ah எப்படி கேட்கணும் என்று தெரிஞ்சுக்கலாம்</li><li>AI-யை copy அடிக்காமல், purinjukka use பண்ணலாம்</li><li>Textbook மற்றும் class notes உடன் சேர்த்து படிக்கலாம்</li>";
+        document.getElementById("warningTitle").innerText = "Students-kku Important Note";
+        document.getElementById("warningText").innerText = "AI-யை purinjukka, revise பண்ண, practice பண்ண use பண்ணுங்க. Just copy paste மட்டும் பண்ணாதீங்க. Formula, definition, important facts எல்லாத்தையும் textbook அல்லது teacher kitte check பண்ணுங்க.";
+        document.getElementById("formTitle").innerText = "Scholarship Test Registration";
+        document.getElementById("formSubtitle").innerText = "Scholarship aptitude test details-kaga inga register pannalam. Responses Google Form and Google Sheet-ku pogum.";
+        document.getElementById("labelName").innerText = "Student Name";
+        document.getElementById("labelSchool").innerText = "School Name";
+        document.getElementById("labelMedium").innerText = "Medium";
+        document.getElementById("labelPhone").innerText = "Mobile Number";
+        document.getElementById("labelGroup").innerText = "Group / Stream";
+        document.getElementById("labelDistrict").innerText = "District";
+        document.getElementById("labelMessage").innerText = "Message / Interest";
+        document.getElementById("submitBtn").innerText = "Register பண்ணு";
+        document.getElementById("resetBtn").innerText = "Reset";
+        document.getElementById("openGoogleFormBtn").innerText = "Google Form open பண்ணு";
+      }
+      renderCards();
+    }
+
+    function buildFormData() {
+      const formData = new FormData();
+      formData.append(FORM_FIELDS.name, document.getElementById("name").value);
+      formData.append(FORM_FIELDS.school, document.getElementById("school").value);
+      formData.append(FORM_FIELDS.medium, document.getElementById("medium").value);
+      formData.append(FORM_FIELDS.phone, document.getElementById("phone").value);
+      formData.append(FORM_FIELDS.group, document.getElementById("group").value);
+      formData.append(FORM_FIELDS.district, document.getElementById("district").value);
+      formData.append(FORM_FIELDS.message, document.getElementById("message").value);
+      return formData;
+    }
+
+    document.getElementById("registrationForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const status = document.getElementById("formStatus");
+      status.textContent = currentLang === "en" ? "Submitting..." : "Submitting...";
+
+      if (GOOGLE_FORM_ACTION === "YOUR_GOOGLE_FORM_RESPONSE_URL") {
+        status.textContent = currentLang === "en"
+          ? "Please add your Google Form action URL and field IDs first."
+          : "Munnadi Google Form URL and field IDs add pannunga.";
+        return;
+      }
+
+      try {
+        await fetch(GOOGLE_FORM_ACTION, {
+          method: "POST",
+          mode: "no-cors",
+          body: buildFormData()
+        });
+
+        status.textContent = currentLang === "en"
+          ? "Registration submitted successfully."
+          : "Registration success-a submit ஆயிடுச்சு.";
+        document.getElementById("registrationForm").reset();
+      } catch (error) {
+        status.textContent = currentLang === "en"
+          ? "Submission failed. Open Google Form directly."
+          : "Submit ஆகலை. Google Form-a direct-a open pannunga.";
+      }
+    });
+
+    document.getElementById("openGoogleFormBtn").addEventListener("click", function(e) {
+      if (GOOGLE_FORM_VIEW === "YOUR_GOOGLE_FORM_VIEW_URL") {
+        e.preventDefault();
+        alert(currentLang === "en"
+          ? "Please add your Google Form view URL first."
+          : "Munnadi Google Form view URL add pannunga.");
+      } else {
+        this.href = GOOGLE_FORM_VIEW;
+      }
+    });
+
+    document.getElementById("btn-en").addEventListener("click", function() { setLanguage("en"); });
+    document.getElementById("btn-ta").addEventListener("click", function() { setLanguage("ta"); });
+
+    renderCards();
+  </script>
+</body>
+</html>
