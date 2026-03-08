@@ -6,23 +6,29 @@
   <title>AEC AI Study Hub</title>
   <style>
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       background: linear-gradient(135deg, #eef4ff, #f9f5ff, #fffaf2);
       color: #1f2937;
     }
+
     .header {
-      background: linear-gradient(135deg, #0f172a, #1d4ed8, #7c3aed);
+      background: linear-gradient(135deg, #071b4a, #1353e2, #7c3aed);
       color: white;
-      padding: 16px;
+      padding: 16px 16px 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
     }
+
     .top-row {
       display: flex;
       justify-content: flex-end;
+      align-items: center;
       gap: 10px;
       margin-bottom: 14px;
     }
+
     .lang-btn {
       border: none;
       background: rgba(255,255,255,0.15);
@@ -31,29 +37,37 @@
       border-radius: 999px;
       cursor: pointer;
       font-weight: bold;
+      transition: 0.2s;
     }
+
     .lang-btn.active {
       background: white;
-      color: #1d4ed8;
+      color: #1353e2;
     }
+
     .brand {
       display: grid;
       grid-template-columns: 90px 1fr 170px;
       align-items: center;
       gap: 12px;
     }
+
     .brand-center { text-align: center; }
+
     .brand-title {
-      font-size: 34px;
+      font-size: 38px;
       font-weight: 800;
       line-height: 1.15;
       margin: 0;
+      text-shadow: 0 3px 10px rgba(0,0,0,0.18);
     }
+
     .brand-sub {
       margin-top: 8px;
       font-size: 18px;
       opacity: 0.95;
     }
+
     .logo-box, .accreditation-box {
       display: flex;
       align-items: center;
@@ -61,6 +75,7 @@
       gap: 10px;
       flex-wrap: wrap;
     }
+
     .logo-box img, .accreditation-box img {
       width: 72px;
       height: 72px;
@@ -68,47 +83,73 @@
       background: white;
       border-radius: 14px;
       padding: 6px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
     }
+
     .creator {
       max-width: 780px;
       margin: 18px auto 0;
       text-align: center;
       background: rgba(255,255,255,0.14);
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 14px;
-      line-height: 1.7;
+      line-height: 1.8;
+      font-size: 15px;
     }
+
     .container {
-      width: min(1150px, 94%);
+      width: min(1180px, 94%);
       margin: 26px auto;
     }
+
     .section-title {
       text-align: center;
-      font-size: 30px;
+      font-size: 32px;
       margin: 0 0 8px;
       color: #0f172a;
     }
+
     .section-subtitle {
       text-align: center;
       color: #475569;
-      max-width: 920px;
-      margin: 0 auto 22px;
+      max-width: 940px;
+      margin: 0 auto 24px;
       line-height: 1.7;
+      font-size: 16px;
     }
+
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 18px;
     }
+
     .card {
-      background: rgba(255,255,255,0.96);
+      background: rgba(255,255,255,0.97);
       border-radius: 22px;
       padding: 18px;
       box-shadow: 0 10px 24px rgba(15,23,42,0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .card h3 { margin: 0 0 10px; }
-    .card p { margin: 0 0 12px; color: #475569; line-height: 1.6; }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 28px rgba(15,23,42,0.12);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      color: #0f172a;
+    }
+
+    .card p {
+      margin: 0 0 12px;
+      color: #475569;
+      line-height: 1.65;
+      min-height: 74px;
+    }
+
     .tag {
       display: inline-block;
       background: #e0e7ff;
@@ -119,21 +160,25 @@
       font-weight: bold;
       margin-bottom: 12px;
     }
+
     .prompt {
       background: #f8fafc;
       border-left: 4px solid #7c3aed;
       border-radius: 12px;
       padding: 12px;
-      min-height: 90px;
+      min-height: 112px;
       margin-bottom: 12px;
-      line-height: 1.6;
+      line-height: 1.65;
       font-size: 14px;
+      color: #334155;
     }
+
     .btn-row {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
+
     .btn {
       border: none;
       border-radius: 10px;
@@ -142,15 +187,19 @@
       cursor: pointer;
       text-decoration: none;
       display: inline-block;
+      font-size: 14px;
     }
+
     .btn-primary {
       background: linear-gradient(135deg, #2563eb, #7c3aed);
       color: white;
     }
+
     .btn-secondary {
       background: #e2e8f0;
       color: #0f172a;
     }
+
     .panel {
       background: white;
       border-radius: 22px;
@@ -158,13 +207,19 @@
       box-shadow: 0 10px 24px rgba(15,23,42,0.08);
       margin-top: 24px;
     }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 14px;
     }
-    label { font-weight: bold; font-size: 14px; }
-    input, select, textarea {
+
+    label {
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    input, select {
       width: 100%;
       padding: 12px;
       margin-top: 6px;
@@ -172,20 +227,29 @@
       border-radius: 10px;
       font-size: 14px;
     }
-    textarea { min-height: 100px; resize: vertical; }
+
     .info-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 18px;
     }
+
     .info-card {
       background: white;
       padding: 20px;
       border-radius: 18px;
       box-shadow: 0 8px 20px rgba(15,23,42,0.06);
     }
+
     .info-card h4 { margin: 0 0 10px; }
-    .info-card ul { margin: 0; padding-left: 18px; line-height: 1.8; color: #475569; }
+
+    .info-card ul {
+      margin: 0;
+      padding-left: 18px;
+      line-height: 1.8;
+      color: #475569;
+    }
+
     .warning {
       background: #fff7ed;
       border-left: 5px solid #f59e0b;
@@ -194,23 +258,34 @@
       line-height: 1.7;
       color: #7c2d12;
     }
+
     .status {
-      margin-top: 12px;
+      margin-top: 14px;
       font-weight: bold;
       color: #166534;
       text-align: center;
+      line-height: 1.6;
     }
+
     footer {
-      background: #0f172a;
+      background: #081736;
       color: #e2e8f0;
       text-align: center;
       padding: 24px 12px;
       margin-top: 36px;
       line-height: 1.8;
     }
+
+    .small-note {
+      text-align: center;
+      color: #64748b;
+      margin-top: 8px;
+      font-size: 13px;
+    }
+
     @media (max-width: 900px) {
       .brand { grid-template-columns: 1fr; }
-      .brand-title { font-size: 26px; }
+      .brand-title { font-size: 28px; }
       .brand-sub { font-size: 16px; }
     }
   </style>
@@ -238,7 +313,7 @@
       </div>
     </div>
 
-    <div id="creatorBox" class="creator">
+    <div class="creator">
       <strong>Website Created By:</strong> Prof.B.Nandhagopal, AP/Civil<br>
       <strong>Contact No.:</strong> +91 8072813033<br>
       <strong>Email:</strong> bnandhagopal@aecsalem.edu.in
@@ -248,13 +323,129 @@
   <main class="container">
     <section>
       <h2 id="heroTitle" class="section-title">AI Study Hub for +2 Students</h2>
-      <p id="heroSubtitle" class="section-subtitle">Choose what you want to do, copy the ready prompt, and open the correct AI tool instantly.</p>
-      <div id="cards" class="cards"></div>
+      <p id="heroSubtitle" class="section-subtitle">
+        Choose what you want to do, copy the ready prompt, and open the correct AI tool instantly.
+      </p>
+
+      <div class="cards">
+        <div class="card">
+          <h3 id="title1">Create Notes</h3>
+          <p id="desc1">If you want quick notes for one lesson, use this.</p>
+          <div class="tag">ChatGPT</div>
+          <div class="prompt" id="prompt1">Create short board exam notes for the chapter Electrochemistry in simple English.</div>
+          <div class="btn-row">
+            <button class="btn btn-secondary" type="button" onclick="copyPrompt('prompt1')" id="copy1">Copy Prompt</button>
+            <a class="btn btn-primary" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" id="open1">Open Tool</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 id="title2">Create Notes from Existing Notes</h3>
+          <p id="desc2">If you already have class notes or PDF, upload and make neat revision notes.</p>
+          <div class="tag">NotebookLM</div>
+          <div class="prompt" id="prompt2">Using these uploaded notes, make neat revision notes for board exam preparation.</div>
+          <div class="btn-row">
+            <button class="btn btn-secondary" type="button" onclick="copyPrompt('prompt2')" id="copy2">Copy Prompt</button>
+            <a class="btn btn-primary" href="https://notebooklm.google.com/" target="_blank" rel="noopener noreferrer" id="open2">Open Tool</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 id="title3">MCQ Generator</h3>
+          <p id="desc3">If you want practice questions, create MCQs from any chapter.</p>
+          <div class="tag">ChatGPT</div>
+          <div class="prompt" id="prompt3">Generate 15 board exam style MCQs from the chapter Ray Optics with answer key.</div>
+          <div class="btn-row">
+            <button class="btn btn-secondary" type="button" onclick="copyPrompt('prompt3')" id="copy3">Copy Prompt</button>
+            <a class="btn btn-primary" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" id="open3">Open Tool</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 id="title4">Important Questions Generator</h3>
+          <p id="desc4">If you want 2-mark, 3-mark, or 5-mark questions, use this.</p>
+          <div class="tag">ChatGPT</div>
+          <div class="prompt" id="prompt4">Give important 2-mark, 3-mark and 5-mark board exam questions from the chapter Current Electricity.</div>
+          <div class="btn-row">
+            <button class="btn btn-secondary" type="button" onclick="copyPrompt('prompt4')" id="copy4">Copy Prompt</button>
+            <a class="btn btn-primary" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" id="open4">Open Tool</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 id="title5">Create Mind Map</h3>
+          <p id="desc5">If you want to remember one chapter easily, make a mind map.</p>
+          <div class="tag">Napkin AI</div>
+          <div class="prompt" id="prompt5">Create a simple mind map for the chapter Reproductive Health.</div>
+          <div class="btn-row">
+            <button class="btn btn-secondary" type="button" onclick="copyPrompt('prompt5')" id="copy5">Copy Prompt</button>
+            <a class="btn btn-primary" href="https://www.napkin.ai/" target="_blank" rel="noopener noreferrer" id="open5">Open Tool</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 id="title6">Biology Diagram Generator</h3>
+          <p id="desc6">If you want biology diagrams or process visuals, use this.</p>
+          <div class="tag">Napkin AI</div>
+          <div class="prompt" id="prompt6">Create a clean labelled diagram style visual for human heart blood circulation for +2 biology students.</div>
+          <div class="btn-row">
+            <button class="btn btn-secondary" type="button" onclick="copyPrompt('prompt6')" id="copy6">Copy Prompt</button>
+            <a class="btn btn-primary" href="https://www.napkin.ai/" target="_blank" rel="noopener noreferrer" id="open6">Open Tool</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 id="title7">Physics Formula Explanation</h3>
+          <p id="desc7">If you want formulas explained step by step, use this.</p>
+          <div class="tag">ChatGPT</div>
+          <div class="prompt" id="prompt7">Explain the formula V equals IR in simple steps with meaning of each term, unit, and one easy example for +2 students.</div>
+          <div class="btn-row">
+            <button class="btn btn-secondary" type="button" onclick="copyPrompt('prompt7')" id="copy7">Copy Prompt</button>
+            <a class="btn btn-primary" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" id="open7">Open Tool</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 id="title8">Create Presentation</h3>
+          <p id="desc8">If you need seminar or class presentation, use this.</p>
+          <div class="tag">Gamma</div>
+          <div class="prompt" id="prompt8">Create a student friendly presentation on Semiconductor Electronics with simple explanation and key points.</div>
+          <div class="btn-row">
+            <button class="btn btn-secondary" type="button" onclick="copyPrompt('prompt8')" id="copy8">Copy Prompt</button>
+            <a class="btn btn-primary" href="https://gamma.app/" target="_blank" rel="noopener noreferrer" id="open8">Open Tool</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 id="title9">Create Video Presentation</h3>
+          <p id="desc9">If you want one lesson as visual explanation, use this tool.</p>
+          <div class="tag">NotebookLM</div>
+          <div class="prompt" id="prompt9">Create a short video overview for this chapter for revision and last minute understanding.</div>
+          <div class="btn-row">
+            <button class="btn btn-secondary" type="button" onclick="copyPrompt('prompt9')" id="copy9">Copy Prompt</button>
+            <a class="btn btn-primary" href="https://notebooklm.google.com/" target="_blank" rel="noopener noreferrer" id="open9">Open Tool</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 id="title10">Ask Doubts / Translate Answers</h3>
+          <p id="desc10">If something is confusing, ask here and get simple explanation in English or spoken Tamil.</p>
+          <div class="tag">ChatGPT</div>
+          <div class="prompt" id="prompt10">Explain Kirchhoff law in very simple English and then in easy spoken Tamil for a +2 student.</div>
+          <div class="btn-row">
+            <button class="btn btn-secondary" type="button" onclick="copyPrompt('prompt10')" id="copy10">Copy Prompt</button>
+            <a class="btn btn-primary" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" id="open10">Open Tool</a>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="panel">
       <h2 id="whyTitle" class="section-title">Why this is useful</h2>
-      <p id="whySubtitle" class="section-subtitle">This is specially made for +2 students who are preparing for board exams.</p>
+      <p id="whySubtitle" class="section-subtitle">
+        This is specially made for +2 students who are preparing for board exams.
+      </p>
+
       <div class="info-grid">
         <div class="info-card">
           <h4 id="benefit1Title">Quick Revision</h4>
@@ -264,6 +455,7 @@
             <li>Can understand in simple English or spoken Tamil</li>
           </ul>
         </div>
+
         <div class="info-card">
           <h4 id="benefit2Title">Better Practice</h4>
           <ul id="benefit2List">
@@ -272,6 +464,7 @@
             <li>Make slides, mind maps, and visuals</li>
           </ul>
         </div>
+
         <div class="info-card">
           <h4 id="benefit3Title">Smart Use of AI</h4>
           <ul id="benefit3List">
@@ -292,7 +485,9 @@
 
     <section class="panel">
       <h2 id="formTitle" class="section-title">Scholarship Test Registration</h2>
-      <p id="formSubtitle" class="section-subtitle">Students can register here for scholarship aptitude test details. Responses will go to Google Form and Google Sheet.</p>
+      <p id="formSubtitle" class="section-subtitle">
+        Students can register here for scholarship aptitude test details. Responses will go to Google Form and Google Sheet.
+      </p>
 
       <form id="registrationForm">
         <div class="grid">
@@ -300,10 +495,12 @@
             <label id="labelName" for="name">Student Name</label>
             <input type="text" id="name" required />
           </div>
+
           <div>
             <label id="labelSchool" for="school">School Name</label>
             <input type="text" id="school" required />
           </div>
+
           <div>
             <label id="labelMedium" for="medium">Medium</label>
             <select id="medium" required>
@@ -312,14 +509,17 @@
               <option value="Tamil">Tamil</option>
             </select>
           </div>
+
           <div>
             <label id="labelPhone" for="phone">Mobile Number</label>
             <input type="tel" id="phone" required />
           </div>
+
           <div>
             <label id="labelGroup" for="group">Group / Stream</label>
             <input type="text" id="group" placeholder="Bio-Maths / Computer Science / Commerce" />
           </div>
+
           <div>
             <label id="labelDistrict" for="district">District</label>
             <input type="text" id="district" />
@@ -329,10 +529,11 @@
         <div class="btn-row" style="margin-top:16px;">
           <button class="btn btn-primary" type="submit" id="submitBtn">Register Now</button>
           <button class="btn btn-secondary" type="reset" id="resetBtn">Reset</button>
-          <a class="btn btn-secondary" id="openGoogleFormBtn" href="https://docs.google.com/forms/d/e/1FAIpQLSdZyusli8aoJXrvs64VFisowlYFrrsvl9Q1BI1mOsGtiQfOnQ/viewform" target="_blank" rel="noopener noreferrer">Open Google Form</a>
+          <a class="btn btn-secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSdZyusli8aoJXrvs64VFisowlYFrrsvl9Q1BI1mOsGtiQfOnQ/viewform" target="_blank" rel="noopener noreferrer" id="openGoogleFormBtn">Open Google Form</a>
         </div>
 
         <div id="formStatus" class="status"></div>
+        <div class="small-note" id="formNote">If auto submit does not work in some mobile browsers, tap “Open Google Form”.</div>
       </form>
     </section>
   </main>
@@ -355,165 +556,189 @@
       district: "entry.2144771428"
     };
 
-    const toolsData = {
-      en: [
-        {
-          title: "Create Notes",
-          desc: "If you want quick notes for one lesson, use this.",
-          tool: "ChatGPT",
-          prompt: "Create short board exam notes for the chapter Electrochemistry in simple English.",
-          url: "https://chatgpt.com/"
-        },
-        {
-          title: "Create Notes from Existing Notes",
-          desc: "If you already have class notes or PDF, upload and make neat revision notes.",
-          tool: "NotebookLM",
-          prompt: "Using these uploaded notes, make neat revision notes for board exam preparation.",
-          url: "https://notebooklm.google.com/"
-        },
-        {
-          title: "Create Mind Map",
-          desc: "If you want to remember one chapter easily, make a mind map.",
-          tool: "Napkin AI",
-          prompt: "Create a simple mind map for the chapter Reproductive Health.",
-          url: "https://www.napkin.ai/"
-        },
-        {
-          title: "Create Presentation",
-          desc: "If you need seminar or class presentation, use this.",
-          tool: "Gamma",
-          prompt: "Create a student-friendly presentation on Semiconductor Electronics.",
-          url: "https://gamma.app/"
-        },
-        {
-          title: "Create Video Presentation",
-          desc: "If you want one lesson as visual explanation, use this tool.",
-          tool: "NotebookLM",
-          prompt: "Create a short video overview for this chapter for revision.",
-          url: "https://notebooklm.google.com/"
-        },
-        {
-          title: "Ask Doubts",
-          desc: "If something is confusing, ask here and get simple explanation.",
-          tool: "ChatGPT",
-          prompt: "Explain Kirchhoff law in very simple English for a +2 student.",
-          url: "https://chatgpt.com/"
-        }
-      ],
-      ta: [
-        {
-          title: "Notes செய்ய",
-          desc: "Oru lesson-ku quick-ah short notes வேணும்னா இதைப் use பண்ணலாம்.",
-          tool: "ChatGPT",
-          prompt: "Electrochemistry lesson-ku easy-a short board exam notes prepare pannunga.",
-          url: "https://chatgpt.com/"
-        },
-        {
-          title: "Already இருக்கும் notes-லிருந்து notes செய்ய",
-          desc: "Unga class notes அல்லது PDF இருந்தா அதுலிருந்து neat-a revision notes செய்யலாம்.",
-          tool: "NotebookLM",
-          prompt: "Indha uploaded notes use panni neat-a board exam revision notes create pannunga.",
-          url: "https://notebooklm.google.com/"
-        },
-        {
-          title: "Mind Map செய்ய",
-          desc: "Oru chapter easy-a நினைவில் வைக்க mind map use பண்ணலாம்.",
-          tool: "Napkin AI",
-          prompt: "Reproductive Health chapter-ku simple mind map create pannunga.",
-          url: "https://www.napkin.ai/"
-        },
-        {
-          title: "Presentation செய்ய",
-          desc: "Seminar அல்லது class presentation வேணும்னா இதைப் use பண்ணலாம்.",
-          tool: "Gamma",
-          prompt: "Semiconductor Electronics topic-ku student-friendly presentation create pannunga.",
-          url: "https://gamma.app/"
-        },
-        {
-          title: "Video Presentation செய்ய",
-          desc: "Oru lesson visual-a புரிஞ்சுக்கணும்னா இது help ஆகும்.",
-          tool: "NotebookLM",
-          prompt: "Indha chapter-ku short revision video overview create pannunga.",
-          url: "https://notebooklm.google.com/"
-        },
-        {
-          title: "Doubt கேட்க",
-          desc: "Puriyala-na இங்க கேளுங்க, simple-a explain பண்ணி தரும்.",
-          tool: "ChatGPT",
-          prompt: "+2 student-ku puriyara madhiri Kirchhoff law-a simple-a explain pannunga.",
-          url: "https://chatgpt.com/"
-        }
-      ]
-    };
-
-    let currentLang = "en";
-
-    function renderCards() {
-      const cards = document.getElementById("cards");
-      cards.innerHTML = "";
-      toolsData[currentLang].forEach((item, i) => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <h3>${item.title}</h3>
-          <p>${item.desc}</p>
-          <div class="tag">${item.tool}</div>
-          <div class="prompt" id="prompt-${i}">${item.prompt}</div>
-          <div class="btn-row">
-            <button class="btn btn-secondary" type="button" onclick="copyPrompt('prompt-${i}')">${currentLang === "en" ? "Copy Prompt" : "Prompt copy பண்ணு"}</button>
-            <a class="btn btn-primary" href="${item.url}" target="_blank" rel="noopener noreferrer">${currentLang === "en" ? "Open Tool" : "Tool open பண்ணு"}</a>
-          </div>
-        `;
-        cards.appendChild(card);
-      });
-    }
-
     function copyPrompt(id) {
       const text = document.getElementById(id).innerText;
-      navigator.clipboard.writeText(text).then(() => {
+      navigator.clipboard.writeText(text).then(function () {
         alert(currentLang === "en" ? "Prompt copied!" : "Prompt copy ஆயிடுச்சு!");
-      }).catch(() => {
+      }).catch(function () {
         alert(currentLang === "en" ? "Copy failed" : "Copy ஆகலை");
       });
     }
 
-    function setLanguage(lang) {
+    let currentLang = "en";
+
+    const enText = {
+      heroTitle: "AI Study Hub for +2 Students",
+      heroSubtitle: "Choose what you want to do, copy the ready prompt, and open the correct AI tool instantly.",
+      whyTitle: "Why this is useful",
+      whySubtitle: "This is specially made for +2 students who are preparing for board exams.",
+      benefit1Title: "Quick Revision",
+      benefit1List: "<li>Big lessons can become short notes</li><li>Difficult topics can be revised quickly</li><li>Can understand in simple English or spoken Tamil</li>",
+      benefit2Title: "Better Practice",
+      benefit2List: "<li>Create MCQs and important questions</li><li>Prepare better structured answers</li><li>Make slides, mind maps, and visuals</li>",
+      benefit3Title: "Smart Use of AI",
+      benefit3List: "<li>Learn how to ask properly</li><li>Use AI for understanding, not blind copying</li><li>Study with textbook and class notes</li>",
+      warningTitle: "Important Note for Students",
+      warningText: "Use AI for understanding, revision, and practice. Don’t just copy and paste. Always check formulas, definitions, and important facts with your textbook or teacher.",
+      formTitle: "Scholarship Test Registration",
+      formSubtitle: "Students can register here for scholarship aptitude test details. Responses will go to Google Form and Google Sheet.",
+      labelName: "Student Name",
+      labelSchool: "School Name",
+      labelMedium: "Medium",
+      labelPhone: "Mobile Number",
+      labelGroup: "Group / Stream",
+      labelDistrict: "District",
+      submitBtn: "Register Now",
+      resetBtn: "Reset",
+      openGoogleFormBtn: "Open Google Form",
+      formNote: "If auto submit does not work in some mobile browsers, tap “Open Google Form”.",
+      copyLabel: "Copy Prompt",
+      openLabel: "Open Tool",
+      statusSubmitting: "Submitting...",
+      statusSuccess: "Registration submitted successfully.",
+      statusFail: "Submission failed. Open Google Form directly."
+    };
+
+    const taText = {
+      heroTitle: "+2 Students-kana AI Study Hub",
+      heroSubtitle: "Enna செய்யணுமோ அதை choose பண்ணுங்க, ready prompt-a copy பண்ணி correct tool-a open பண்ணுங்க.",
+      whyTitle: "Ithu eppadi useful",
+      whySubtitle: "Board exam prepare பண்ணுற +2 students-kaga தான் இது specially செய்யப்பட்டுள்ளது.",
+      benefit1Title: "Quick Revision",
+      benefit1List: "<li>Periya lessons short notes ஆக மாறும்</li><li>Kashtamana topics quick-ah revise பண்ணலாம்</li><li>Easy English அல்லது spoken Tamil-la purinjukkalam</li>",
+      benefit2Title: "Better Practice",
+      benefit2List: "<li>MCQ மற்றும் important questions செய்யலாம்</li><li>Better answer structure prepare பண்ணலாம்</li><li>Slides, mind map, visuals செய்யலாம்</li>",
+      benefit3Title: "Smart AI Use",
+      benefit3List: "<li>Correct-ah எப்படி கேட்கணும் என்று தெரிஞ்சுக்கலாம்</li><li>AI-யை copy அடிக்காமல், purinjukka use பண்ணலாம்</li><li>Textbook மற்றும் class notes உடன் சேர்த்து படிக்கலாம்</li>",
+      warningTitle: "Students-kku Important Note",
+      warningText: "AI-யை purinjukka, revise பண்ண, practice பண்ண use பண்ணுங்க. Just copy paste மட்டும் பண்ணாதீங்க. Formula, definition, important facts எல்லாத்தையும் textbook அல்லது teacher kitte check பண்ணுங்க.",
+      formTitle: "Scholarship Test Registration",
+      formSubtitle: "Scholarship aptitude test details-kaga inga register pannalam. Responses Google Form and Google Sheet-ku pogum.",
+      labelName: "Student Name",
+      labelSchool: "School Name",
+      labelMedium: "Medium",
+      labelPhone: "Mobile Number",
+      labelGroup: "Group / Stream",
+      labelDistrict: "District",
+      submitBtn: "Register பண்ணு",
+      resetBtn: "Reset",
+      openGoogleFormBtn: "Google Form open பண்ணு",
+      formNote: "Auto submit சில mobile browsers-la work ஆகலானா, “Google Form open பண்ணு” button use பண்ணுங்க.",
+      copyLabel: "Prompt copy பண்ணு",
+      openLabel: "Tool open பண்ணு",
+      statusSubmitting: "Submitting...",
+      statusSuccess: "Registration success-a submit ஆயிடுச்சு.",
+      statusFail: "Submit ஆகலை. Google Form-a direct-a open pannunga."
+    };
+
+    const cardText = {
+      en: {
+        1: ["Create Notes", "If you want quick notes for one lesson, use this.", "Create short board exam notes for the chapter Electrochemistry in simple English."],
+        2: ["Create Notes from Existing Notes", "If you already have class notes or PDF, upload and make neat revision notes.", "Using these uploaded notes, make neat revision notes for board exam preparation."],
+        3: ["MCQ Generator", "If you want practice questions, create MCQs from any chapter.", "Generate 15 board exam style MCQs from the chapter Ray Optics with answer key."],
+        4: ["Important Questions Generator", "If you want 2-mark, 3-mark, or 5-mark questions, use this.", "Give important 2-mark, 3-mark and 5-mark board exam questions from the chapter Current Electricity."],
+        5: ["Create Mind Map", "If you want to remember one chapter easily, make a mind map.", "Create a simple mind map for the chapter Reproductive Health."],
+        6: ["Biology Diagram Generator", "If you want biology diagrams or process visuals, use this.", "Create a clean labelled diagram style visual for human heart blood circulation for +2 biology students."],
+        7: ["Physics Formula Explanation", "If you want formulas explained step by step, use this.", "Explain the formula V equals IR in simple steps with meaning of each term, unit, and one easy example for +2 students."],
+        8: ["Create Presentation", "If you need seminar or class presentation, use this.", "Create a student friendly presentation on Semiconductor Electronics with simple explanation and key points."],
+        9: ["Create Video Presentation", "If you want one lesson as visual explanation, use this tool.", "Create a short video overview for this chapter for revision and last minute understanding."],
+        10: ["Ask Doubts / Translate Answers", "If something is confusing, ask here and get simple explanation in English or spoken Tamil.", "Explain Kirchhoff law in very simple English and then in easy spoken Tamil for a +2 student."]
+      },
+      ta: {
+        1: ["Notes செய்ய", "Oru lesson-ku quick-ah short notes வேணும்னா இதைப் use பண்ணலாம்.", "Electrochemistry lesson-ku easy-a short board exam notes prepare pannunga."],
+        2: ["Already இருக்கும் notes-லிருந்து notes செய்ய", "Unga class notes அல்லது PDF இருந்தா அதுலிருந்து neat-a revision notes செய்யலாம்.", "Indha uploaded notes use panni neat-a board exam revision notes create pannunga."],
+        3: ["MCQ செய்ய", "Practice-kaga chapter-la இருந்து MCQ create பண்ண இதைப் use பண்ணலாம்.", "Ray Optics chapter-la இருந்து 15 board exam style MCQ answer key-oda create pannunga."],
+        4: ["Important Questions செய்ய", "2 mark, 3 mark, 5 mark important questions வேணும்னா use பண்ணலாம்.", "Current Electricity chapter-la இருந்து important 2 mark, 3 mark, 5 mark questions kudunga."],
+        5: ["Mind Map செய்ய", "Oru chapter easy-a நினைவில் வைக்க mind map use பண்ணலாம்.", "Reproductive Health chapter-ku simple mind map create pannunga."],
+        6: ["Biology Diagram செய்ய", "Biology diagram அல்லது process visual வேணும்னா இதைப் use பண்ணலாம்.", "Human heart blood circulation-ku clean-a labelled diagram style visual create pannunga for +2 biology students."],
+        7: ["Physics Formula புரிஞ்சுக்க", "Formula step by step puriyanum-na use பண்ணலாம்.", "V = IR formula-la ஒவ்வொரு term meaning, unit, ஒரு easy example-oda simple-a explain pannunga for +2 students."],
+        8: ["Presentation செய்ய", "Seminar அல்லது class presentation வேணும்னா இதைப் use பண்ணலாம்.", "Semiconductor Electronics topic-ku student-friendly presentation simple explanation and key points-oda create pannunga."],
+        9: ["Video Presentation செய்ய", "Oru lesson visual-a புரிஞ்சுக்கணும்னா இது help ஆகும்.", "Indha chapter-ku short revision video overview create pannunga for last minute understanding."],
+        10: ["Doubt கேட்க / Translate செய்ய", "Puriyala-na இங்க கேளுங்க. English-லும் spoken Tamil-lum explain பண்ணி தரும்.", "Kirchhoff law-a very simple English-la explain pannunga, appuram easy spoken Tamil-la explain pannunga for a +2 student."]
+      }
+    };
+
+    function applyLanguage(lang) {
       currentLang = lang;
+      const text = lang === "en" ? enText : taText;
+
       document.getElementById("btn-en").classList.toggle("active", lang === "en");
       document.getElementById("btn-ta").classList.toggle("active", lang === "ta");
 
-      if (lang === "en") {
-        document.getElementById("heroTitle").innerText = "AI Study Hub for +2 Students";
-        document.getElementById("heroSubtitle").innerText = "Choose what you want to do, copy the ready prompt, and open the correct AI tool instantly.";
-        document.getElementById("whyTitle").innerText = "Why this is useful";
-        document.getElementById("whySubtitle").innerText = "This is specially made for +2 students who are preparing for board exams.";
-        document.getElementById("benefit1Title").innerText = "Quick Revision";
-        document.getElementById("benefit1List").innerHTML = "<li>Big lessons can become short notes</li><li>Difficult topics can be revised quickly</li><li>Can understand in simple English or spoken Tamil</li>";
-        document.getElementById("benefit2Title").innerText = "Better Practice";
-        document.getElementById("benefit2List").innerHTML = "<li>Create MCQs and important questions</li><li>Prepare better structured answers</li><li>Make slides, mind maps, and visuals</li>";
-        document.getElementById("benefit3Title").innerText = "Smart Use of AI";
-        document.getElementById("benefit3List").innerHTML = "<li>Learn how to ask properly</li><li>Use AI for understanding, not blind copying</li><li>Study with textbook and class notes</li>";
-        document.getElementById("warningTitle").innerText = "Important Note for Students";
-        document.getElementById("warningText").innerText = "Use AI for understanding, revision, and practice. Don’t just copy and paste. Always check formulas, definitions, and important facts with your textbook or teacher.";
-        document.getElementById("formTitle").innerText = "Scholarship Test Registration";
-        document.getElementById("formSubtitle").innerText = "Students can register here for scholarship aptitude test details. Responses will go to Google Form and Google Sheet.";
-        document.getElementById("labelName").innerText = "Student Name";
-        document.getElementById("labelSchool").innerText = "School Name";
-        document.getElementById("labelMedium").innerText = "Medium";
-        document.getElementById("labelPhone").innerText = "Mobile Number";
-        document.getElementById("labelGroup").innerText = "Group / Stream";
-        document.getElementById("labelDistrict").innerText = "District";
-        document.getElementById("submitBtn").innerText = "Register Now";
-        document.getElementById("resetBtn").innerText = "Reset";
-        document.getElementById("openGoogleFormBtn").innerText = "Open Google Form";
-      } else {
-        document.getElementById("heroTitle").innerText = "+2 Students-kana AI Study Hub";
-        document.getElementById("heroSubtitle").innerText = "Enna செய்யணுமோ அதை choose பண்ணுங்க, ready prompt-a copy பண்ணி correct tool-a open பண்ணுங்க.";
-        document.getElementById("whyTitle").innerText = "Ithu eppadi useful";
-        document.getElementById("whySubtitle").innerText = "Board exam prepare பண்ணுற +2 students-kaga தான் இது specially செய்யப்பட்டுள்ளது.";
-        document.getElementById("benefit1Title").innerText = "Quick Revision";
-        document.getElementById("benefit1List").innerHTML = "<li>Periya lessons short notes ஆக மாறும்</li><li>Kashtamana topics quick-ah revise பண்ணலாம்</li><li>Easy English அல்லது spoken Tamil-la purinjukkalam</li>";
-        document.getElementById("benefit2Title").innerText = "Better Practice";
-        document.getElementById("benefit2List").innerHTML = "<li>MCQ மற்றும் important questions செய்யலாம்</li><li>Better answer structure prepare பண்ணலாம்</li><li>Slides, mind map, visuals செய்யலாம்</li>";
-        document.getElementById("benefit3Title").innerText = "Smart AI Use";
-        document.getElementById("benefit3List").innerHTML = "<li>Correct-ah எப்படி கேட்கணும் என்று தெ
+      document.getElementById("heroTitle").innerText = text.heroTitle;
+      document.getElementById("heroSubtitle").innerText = text.heroSubtitle;
+      document.getElementById("whyTitle").innerText = text.whyTitle;
+      document.getElementById("whySubtitle").innerText = text.whySubtitle;
+      document.getElementById("benefit1Title").innerText = text.benefit1Title;
+      document.getElementById("benefit1List").innerHTML = text.benefit1List;
+      document.getElementById("benefit2Title").innerText = text.benefit2Title;
+      document.getElementById("benefit2List").innerHTML = text.benefit2List;
+      document.getElementById("benefit3Title").innerText = text.benefit3Title;
+      document.getElementById("benefit3List").innerHTML = text.benefit3List;
+      document.getElementById("warningTitle").innerText = text.warningTitle;
+      document.getElementById("warningText").innerText = text.warningText;
+      document.getElementById("formTitle").innerText = text.formTitle;
+      document.getElementById("formSubtitle").innerText = text.formSubtitle;
+      document.getElementById("labelName").innerText = text.labelName;
+      document.getElementById("labelSchool").innerText = text.labelSchool;
+      document.getElementById("labelMedium").innerText = text.labelMedium;
+      document.getElementById("labelPhone").innerText = text.labelPhone;
+      document.getElementById("labelGroup").innerText = text.labelGroup;
+      document.getElementById("labelDistrict").innerText = text.labelDistrict;
+      document.getElementById("submitBtn").innerText = text.submitBtn;
+      document.getElementById("resetBtn").innerText = text.resetBtn;
+      document.getElementById("openGoogleFormBtn").innerText = text.openGoogleFormBtn;
+      document.getElementById("formNote").innerText = text.formNote;
+
+      for (let i = 1; i <= 10; i++) {
+        document.getElementById("title" + i).innerText = cardText[lang][i][0];
+        document.getElementById("desc" + i).innerText = cardText[lang][i][1];
+        document.getElementById("prompt" + i).innerText = cardText[lang][i][2];
+        document.getElementById("copy" + i).innerText = text.copyLabel;
+        document.getElementById("open" + i).innerText = text.openLabel;
+      }
+    }
+
+    function buildFormData() {
+      const formData = new FormData();
+      formData.append(FORM_FIELDS.name, document.getElementById("name").value);
+      formData.append(FORM_FIELDS.school, document.getElementById("school").value);
+      formData.append(FORM_FIELDS.medium, document.getElementById("medium").value);
+      formData.append(FORM_FIELDS.phone, document.getElementById("phone").value);
+      formData.append(FORM_FIELDS.group, document.getElementById("group").value);
+      formData.append(FORM_FIELDS.district, document.getElementById("district").value);
+      return formData;
+    }
+
+    document.getElementById("registrationForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const text = currentLang === "en" ? enText : taText;
+      const status = document.getElementById("formStatus");
+      status.textContent = text.statusSubmitting;
+
+      try {
+        await fetch(GOOGLE_FORM_ACTION, {
+          method: "POST",
+          mode: "no-cors",
+          body: buildFormData()
+        });
+
+        status.textContent = text.statusSuccess;
+        document.getElementById("registrationForm").reset();
+      } catch (error) {
+        status.textContent = text.statusFail;
+      }
+    });
+
+    document.getElementById("btn-en").addEventListener("click", function () {
+      applyLanguage("en");
+    });
+
+    document.getElementById("btn-ta").addEventListener("click", function () {
+      applyLanguage("ta");
+    });
+
+    applyLanguage("en");
+  </script>
+</body>
+</html>
