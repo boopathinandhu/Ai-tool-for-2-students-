@@ -198,6 +198,7 @@
       margin-top: 12px;
       font-weight: bold;
       color: #166534;
+      text-align: center;
     }
     footer {
       background: #0f172a;
@@ -281,45 +282,59 @@
         </div>
       </div>
     </section>
+
     <section class="panel">
       <h2 id="warningTitle" class="section-title">Important Note for Students</h2>
       <div id="warningText" class="warning">
         Use AI for understanding, revision, and practice. Don’t just copy and paste. Always check formulas, definitions, and important facts with your textbook or teacher.
       </div>
     </section>
-<section class="panel">
-<h2>Scholarship Test Registration</h2>
 
-<form action="https://docs.google.com/forms/d/e/1FAIpQLSdZyusli8aoJXrvs64VFisowlYFrrsvl9Q1BI1mOsGtiQfOnQ/formResponse"
-method="POST" target="_blank">
+    <section class="panel">
+      <h2 id="formTitle" class="section-title">Scholarship Test Registration</h2>
+      <p id="formSubtitle" class="section-subtitle">Students can register here for scholarship aptitude test details. Responses will go to Google Form and Google Sheet.</p>
 
-<label>Student Name</label>
-<input name="entry.983033617" required>
+      <form id="registrationForm">
+        <div class="grid">
+          <div>
+            <label id="labelName" for="name">Student Name</label>
+            <input type="text" id="name" required />
+          </div>
+          <div>
+            <label id="labelSchool" for="school">School Name</label>
+            <input type="text" id="school" required />
+          </div>
+          <div>
+            <label id="labelMedium" for="medium">Medium</label>
+            <select id="medium" required>
+              <option value="">Select</option>
+              <option value="English">English</option>
+              <option value="Tamil">Tamil</option>
+            </select>
+          </div>
+          <div>
+            <label id="labelPhone" for="phone">Mobile Number</label>
+            <input type="tel" id="phone" required />
+          </div>
+          <div>
+            <label id="labelGroup" for="group">Group / Stream</label>
+            <input type="text" id="group" placeholder="Bio-Maths / Computer Science / Commerce" />
+          </div>
+          <div>
+            <label id="labelDistrict" for="district">District</label>
+            <input type="text" id="district" />
+          </div>
+        </div>
 
-<label>School Name</label>
-<input name="entry.801039746" required>
+        <div class="btn-row" style="margin-top:16px;">
+          <button class="btn btn-primary" type="submit" id="submitBtn">Register Now</button>
+          <button class="btn btn-secondary" type="reset" id="resetBtn">Reset</button>
+          <a class="btn btn-secondary" id="openGoogleFormBtn" href="https://docs.google.com/forms/d/e/1FAIpQLSdZyusli8aoJXrvs64VFisowlYFrrsvl9Q1BI1mOsGtiQfOnQ/viewform" target="_blank" rel="noopener noreferrer">Open Google Form</a>
+        </div>
 
-<label>Medium</label>
-<select name="entry.1294393761" required>
-<option>English</option>
-<option>Tamil</option>
-</select>
-
-<label>Mobile Number</label>
-<input name="entry.682366574" required>
-
-<label>Group</label>
-<input name="entry.2031149044">
-
-<label>District</label>
-<input name="entry.2144771428">
-
-<br><br>
-
-<button type="submit">Register Now</button>
-
-</form>
-</section>
+        <div id="formStatus" class="status"></div>
+      </form>
+    </section>
   </main>
 
   <footer>
@@ -329,17 +344,15 @@ method="POST" target="_blank">
   </footer>
 
   <script>
-    const GOOGLE_FORM_ACTION = "https://forms.gle/ADNcb8RGTJT57Yde8";
-    const GOOGLE_FORM_VIEW = "https://docs.google.com/forms/d/e/1FAIpQLSdZyusli8aoJXrvs64VFisowlYFrrsvl9Q1BI1mOsGtiQfOnQ/viewform";
+    const GOOGLE_FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSdZyusli8aoJXrvs64VFisowlYFrrsvl9Q1BI1mOsGtiQfOnQ/formResponse";
 
     const FORM_FIELDS = {
-      name: "entry.1111111111",
-      school: "entry.2222222222",
-      medium: "entry.3333333333",
-      phone: "entry.4444444444",
-      group: "entry.5555555555",
-      district: "entry.6666666666",
-      message: "entry.7777777777"
+      name: "entry.983033617",
+      school: "entry.801039746",
+      medium: "entry.1294393761",
+      phone: "entry.682366574",
+      group: "entry.2031149044",
+      district: "entry.2144771428"
     };
 
     const toolsData = {
@@ -490,7 +503,6 @@ method="POST" target="_blank">
         document.getElementById("labelPhone").innerText = "Mobile Number";
         document.getElementById("labelGroup").innerText = "Group / Stream";
         document.getElementById("labelDistrict").innerText = "District";
-        document.getElementById("labelMessage").innerText = "Message / Interest";
         document.getElementById("submitBtn").innerText = "Register Now";
         document.getElementById("resetBtn").innerText = "Reset";
         document.getElementById("openGoogleFormBtn").innerText = "Open Google Form";
@@ -504,83 +516,4 @@ method="POST" target="_blank">
         document.getElementById("benefit2Title").innerText = "Better Practice";
         document.getElementById("benefit2List").innerHTML = "<li>MCQ மற்றும் important questions செய்யலாம்</li><li>Better answer structure prepare பண்ணலாம்</li><li>Slides, mind map, visuals செய்யலாம்</li>";
         document.getElementById("benefit3Title").innerText = "Smart AI Use";
-        document.getElementById("benefit3List").innerHTML = "<li>Correct-ah எப்படி கேட்கணும் என்று தெரிஞ்சுக்கலாம்</li><li>AI-யை copy அடிக்காமல், purinjukka use பண்ணலாம்</li><li>Textbook மற்றும் class notes உடன் சேர்த்து படிக்கலாம்</li>";
-        document.getElementById("warningTitle").innerText = "Students-kku Important Note";
-        document.getElementById("warningText").innerText = "AI-யை purinjukka, revise பண்ண, practice பண்ண use பண்ணுங்க. Just copy paste மட்டும் பண்ணாதீங்க. Formula, definition, important facts எல்லாத்தையும் textbook அல்லது teacher kitte check பண்ணுங்க.";
-        document.getElementById("formTitle").innerText = "Scholarship Test Registration";
-        document.getElementById("formSubtitle").innerText = "Scholarship aptitude test details-kaga inga register pannalam. Responses Google Form and Google Sheet-ku pogum.";
-        document.getElementById("labelName").innerText = "Student Name";
-        document.getElementById("labelSchool").innerText = "School Name";
-        document.getElementById("labelMedium").innerText = "Medium";
-        document.getElementById("labelPhone").innerText = "Mobile Number";
-        document.getElementById("labelGroup").innerText = "Group / Stream";
-        document.getElementById("labelDistrict").innerText = "District";
-        document.getElementById("labelMessage").innerText = "Message / Interest";
-        document.getElementById("submitBtn").innerText = "Register பண்ணு";
-        document.getElementById("resetBtn").innerText = "Reset";
-        document.getElementById("openGoogleFormBtn").innerText = "Google Form open பண்ணு";
-      }
-      renderCards();
-    }
-
-    function buildFormData() {
-      const formData = new FormData();
-      formData.append(FORM_FIELDS.name, document.getElementById("name").value);
-      formData.append(FORM_FIELDS.school, document.getElementById("school").value);
-      formData.append(FORM_FIELDS.medium, document.getElementById("medium").value);
-      formData.append(FORM_FIELDS.phone, document.getElementById("phone").value);
-      formData.append(FORM_FIELDS.group, document.getElementById("group").value);
-      formData.append(FORM_FIELDS.district, document.getElementById("district").value);
-      formData.append(FORM_FIELDS.message, document.getElementById("message").value);
-      return formData;
-    }
-
-    document.getElementById("registrationForm").addEventListener("submit", async function(e) {
-      e.preventDefault();
-
-      const status = document.getElementById("formStatus");
-      status.textContent = currentLang === "en" ? "Submitting..." : "Submitting...";
-
-      if (GOOGLE_FORM_ACTION === "YOUR_GOOGLE_FORM_RESPONSE_URL") {
-        status.textContent = currentLang === "en"
-          ? "Please add your Google Form action URL and field IDs first."
-          : "Munnadi Google Form URL and field IDs add pannunga.";
-        return;
-      }
-
-      try {
-        await fetch(GOOGLE_FORM_ACTION, {
-          method: "POST",
-          mode: "no-cors",
-          body: buildFormData()
-        });
-
-        status.textContent = currentLang === "en"
-          ? "Registration submitted successfully."
-          : "Registration success-a submit ஆயிடுச்சு.";
-        document.getElementById("registrationForm").reset();
-      } catch (error) {
-        status.textContent = currentLang === "en"
-          ? "Submission failed. Open Google Form directly."
-          : "Submit ஆகலை. Google Form-a direct-a open pannunga.";
-      }
-    });
-
-    document.getElementById("openGoogleFormBtn").addEventListener("click", function(e) {
-      if (GOOGLE_FORM_VIEW === "YOUR_GOOGLE_FORM_VIEW_URL") {
-        e.preventDefault();
-        alert(currentLang === "en"
-          ? "Please add your Google Form view URL first."
-          : "Munnadi Google Form view URL add pannunga.");
-      } else {
-        this.href = GOOGLE_FORM_VIEW;
-      }
-    });
-
-    document.getElementById("btn-en").addEventListener("click", function() { setLanguage("en"); });
-    document.getElementById("btn-ta").addEventListener("click", function() { setLanguage("ta"); });
-
-    renderCards();
-  </script>
-</body>
-</html>
+        document.getElementById("benefit3List").innerHTML = "<li>Correct-ah எப்படி கேட்கணும் என்று தெ
