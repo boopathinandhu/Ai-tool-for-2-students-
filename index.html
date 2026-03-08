@@ -5,63 +5,253 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Study Hub for +2 Students</title>
   <style>
-    *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-    body{background:linear-gradient(135deg,#f5f3ff,#eef4ff);color:#1f2937}
-    header{
-      background:linear-gradient(135deg,#0f172a,#2563eb,#7c3aed);
-      color:#fff;padding:18px 14px 40px
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
     }
-    .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-    .college{font-size:14px}
-    .lang-switch{display:flex;gap:8px;background:rgba(255,255,255,.15);padding:5px;border-radius:999px}
-    .lang-switch button{
-      border:none;padding:8px 16px;border-radius:999px;cursor:pointer;
-      background:transparent;color:#fff;font-weight:bold
+
+    body {
+      background: linear-gradient(135deg, #f5f3ff, #eef4ff);
+      color: #1f2937;
     }
-    .lang-switch button.active{background:#fff;color:#2563eb}
-    .hero{text-align:center;margin-top:28px}
-    .hero h1{font-size:42px;margin-bottom:10px}
-    .hero p{max-width:900px;margin:0 auto;line-height:1.6;padding:0 12px}
-    .creator-box{
-      margin:20px auto 0;max-width:430px;background:rgba(255,255,255,.14);
-      padding:16px;border-radius:16px;line-height:1.7
+
+    header {
+      background: linear-gradient(135deg, #0f172a, #2563eb, #7c3aed);
+      color: white;
+      padding: 18px 14px 40px;
     }
-    .section{width:min(1100px,94%);margin:34px auto}
-    .section-title{text-align:center;font-size:28px;margin-bottom:10px}
-    .section-subtitle{text-align:center;color:#475569;max-width:900px;margin:0 auto 24px;line-height:1.7}
-    .task-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-    .card{background:#fff;border-radius:20px;padding:20px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
-    .card h3{margin-bottom:10px;font-size:20px}
-    .card p{color:#475569;line-height:1.6;margin-bottom:12px}
-    .tool-tag{
-      display:inline-block;background:#e0e7ff;color:#3730a3;padding:6px 12px;
-      border-radius:999px;font-size:13px;font-weight:bold;margin-bottom:12px
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
-    .prompt-box{
-      background:#f8fafc;border-left:4px solid #7c3aed;padding:12px;
-      border-radius:10px;margin-bottom:12px;line-height:1.6;font-size:14px
+
+    .college {
+      font-size: 14px;
     }
-    .btn-row{display:flex;flex-wrap:wrap;gap:10px}
-    .btn{
-      border:none;cursor:pointer;padding:10px 14px;border-radius:10px;
-      font-weight:bold;text-decoration:none;display:inline-block
+
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+      background: rgba(255,255,255,0.15);
+      padding: 5px;
+      border-radius: 999px;
     }
-    .btn-primary{background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff}
-    .btn-secondary{background:#e2e8f0;color:#0f172a}
-    .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
-    .info-card{background:#fff;padding:20px;border-radius:18px;box-shadow:0 8px 24px rgba(0,0,0,.06)}
-    .info-card h4{margin-bottom:10px}
-    .info-card ul{padding-left:18px;line-height:1.8;color:#475569}
-    .warning-box{background:#fff7ed;border-left:5px solid #f59e0b;padding:18px;border-radius:12px;line-height:1.7}
-    .form-wrap{background:#fff;padding:24px;border-radius:22px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
-    .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
-    input,select,textarea{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:10px;margin-top:6px}
-    textarea{min-height:100px;resize:vertical}
-    .form-actions{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
-    footer{background:#0f172a;color:#e2e8f0;text-align:center;padding:24px 12px;margin-top:40px;line-height:1.8}
-    @media (max-width:768px){
-      .hero h1{font-size:24px}
-      .section-title{font-size:22px}
+
+    .lang-switch button {
+      border: none;
+      padding: 8px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      background: transparent;
+      color: white;
+      font-weight: bold;
+    }
+
+    .lang-switch button.active {
+      background: white;
+      color: #2563eb;
+    }
+
+    .hero {
+      text-align: center;
+      margin-top: 28px;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.6;
+      padding: 0 12px;
+    }
+
+    .creator-box {
+      margin: 20px auto 0;
+      max-width: 460px;
+      background: rgba(255,255,255,0.14);
+      padding: 16px;
+      border-radius: 16px;
+      line-height: 1.7;
+    }
+
+    .section {
+      width: min(1100px, 94%);
+      margin: 34px auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #475569;
+      max-width: 900px;
+      margin: 0 auto 24px;
+      line-height: 1.7;
+    }
+
+    .task-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .card p {
+      color: #475569;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .tool-tag {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #3730a3;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .prompt-box {
+      background: #f8fafc;
+      border-left: 4px solid #7c3aed;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      line-height: 1.6;
+      font-size: 14px;
+      min-height: 86px;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .info-card {
+      background: white;
+      padding: 20px;
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    .info-card h4 {
+      margin-bottom: 10px;
+    }
+
+    .info-card ul {
+      padding-left: 18px;
+      line-height: 1.8;
+      color: #475569;
+    }
+
+    .warning-box {
+      background: #fff7ed;
+      border-left: 5px solid #f59e0b;
+      padding: 18px;
+      border-radius: 12px;
+      line-height: 1.7;
+    }
+
+    .form-wrap {
+      background: white;
+      padding: 24px;
+      border-radius: 22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      margin-top: 6px;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .form-actions {
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #e2e8f0;
+      text-align: center;
+      padding: 24px 12px;
+      margin-top: 40px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 24px; }
+      .section-title { font-size: 22px; }
     }
   </style>
 </head>
@@ -139,15 +329,15 @@
         <div class="form-grid">
           <div>
             <label id="labelName">Student Name</label>
-            <input type="text" id="name">
+            <input type="text" id="name" required>
           </div>
           <div>
             <label id="labelSchool">School Name</label>
-            <input type="text" id="school">
+            <input type="text" id="school" required>
           </div>
           <div>
             <label id="labelMedium">Medium</label>
-            <select id="medium">
+            <select id="medium" required>
               <option value="">Select</option>
               <option value="English Medium">English Medium</option>
               <option value="Tamil Medium">Tamil Medium</option>
@@ -155,7 +345,7 @@
           </div>
           <div>
             <label id="labelPhone">Mobile Number</label>
-            <input type="tel" id="phone">
+            <input type="tel" id="phone" required>
           </div>
           <div>
             <label id="labelGroup">Group / Stream</label>
@@ -228,7 +418,7 @@
           title: "Ask Doubts",
           desc: "Get difficult concepts explained in simple English or Tamil step by step.",
           tool: "ChatGPT",
-          prompt: "Explain Kirchhoff’s law in very simple English for a +2 student.",
+          prompt: "Explain Kirchhoff law in very simple English for a +2 student.",
           url: "https://chatgpt.com/"
         }
       ],
@@ -293,8 +483,12 @@
           <div class="tool-tag">${item.tool}</div>
           <div class="prompt-box" id="prompt-${index}">${item.prompt}</div>
           <div class="btn-row">
-            <button class="btn btn-secondary" type="button" onclick="copyPrompt('prompt-${index}')">${currentLang === "en" ? "Copy Prompt" : "Prompt நகலெடு"}</button>
-            <a class="btn btn-primary" href="${item.url}" target="_blank">${currentLang === "en" ? "Open Tool" : "Tool திறக்க"}</a>
+            <button class="btn btn-secondary" type="button" onclick="copyPrompt('prompt-${index}')">
+              ${currentLang === "en" ? "Copy Prompt" : "Prompt நகலெடு"}
+            </button>
+            <a class="btn btn-primary" href="${item.url}" target="_blank">
+              ${currentLang === "en" ? "Open Tool" : "Tool திறக்க"}
+            </a>
           </div>
         `;
         taskGrid.appendChild(card);
@@ -304,12 +498,17 @@
     function copyPrompt(id) {
       const text = document.getElementById(id).innerText;
       navigator.clipboard.writeText(text)
-        .then(() => alert(currentLang === "en" ? "Prompt copied!" : "Prompt நகலெடுக்கப்பட்டது!"))
-        .catch(() => alert(currentLang === "en" ? "Copy failed" : "நகலெடுக்க முடியவில்லை"));
+        .then(function() {
+          alert(currentLang === "en" ? "Prompt copied!" : "Prompt நகலெடுக்கப்பட்டது!");
+        })
+        .catch(function() {
+          alert(currentLang === "en" ? "Copy failed" : "நகலெடுக்க முடியவில்லை");
+        });
     }
 
     function setLanguage(lang) {
       currentLang = lang;
+
       document.getElementById("btn-en").classList.toggle("active", lang === "en");
       document.getElementById("btn-ta").classList.toggle("active", lang === "ta");
 
@@ -353,39 +552,4 @@
         document.getElementById("benefit3Title").innerText = "சரியான AI பயன்பாடு";
         document.getElementById("benefit3List").innerHTML = "<li>சரியான prompt கேட்க கற்றுக்கொள்ளலாம்</li><li>AI-யை copy செய்வதற்கு அல்ல, படிப்பு உதவியாளராகப் பயன்படுத்தலாம்</li><li>பாடப்புத்தகம் மற்றும் class notes உடன் சேர்த்து பயன்படுத்தலாம்</li>";
         document.getElementById("warningTitle").innerText = "மாணவர்களுக்கு முக்கிய அறிவுரை";
-        document.getElementById("warningText").innerText = "AI-யை புரிதல், மீள்பார்வை மற்றும் பயிற்சிக்காக பயன்படுத்துங்கள். பதில்களை அப்படியே நகலெடுக்க வேண்டாம்.";
-        document.getElementById("formTitle").innerText = "இலவச Scholarship Aptitude தேர்வு பதிவு";
-        document.getElementById("formSubtitle").innerText = "மாணவர்கள் scholarship aptitude test பற்றிய தகவல்களை பெற இங்கு பதிவு செய்யலாம்.";
-        document.getElementById("labelName").innerText = "மாணவர் பெயர்";
-        document.getElementById("labelSchool").innerText = "பள்ளி பெயர்";
-        document.getElementById("labelMedium").innerText = "மொழி வழி";
-        document.getElementById("labelPhone").innerText = "மொபைல் எண்";
-        document.getElementById("labelGroup").innerText = "குழு / பிரிவு";
-        document.getElementById("labelDistrict").innerText = "மாவட்டம்";
-        document.getElementById("labelMessage").innerText = "செய்தி / விருப்பம்";
-        document.getElementById("submitBtn").innerText = "இப்போது பதிவு செய்யுங்கள்";
-        document.getElementById("resetBtn").innerText = "அழிக்க";
-      }
-
-      renderCards();
-    }
-
-    document.getElementById("btn-en").addEventListener("click", function () {
-      setLanguage("en");
-    });
-
-    document.getElementById("btn-ta").addEventListener("click", function () {
-      setLanguage("ta");
-    });
-
-    document.getElementById("registrationForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      alert(currentLang === "en"
-        ? "Form submitted. Connect this later to Google Forms or backend."
-        : "படிவம் சமர்ப்பிக்கப்பட்டது. இதை பின்னர் Google Forms அல்லது backend உடன் இணைக்கலாம்.");
-    });
-
-    renderCards();
-  </script>
-</body>
-</html>
+        document.getElementById("warningText").innerText = "AI-யை புரிதல், மீள்பார்வை 
