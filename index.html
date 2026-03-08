@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Study Hub for +2 Students | Annapoorana Engineering College</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #eef6ff, #f6f1ff, #fff8ec);
+      color: #1f2937;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f172a, #1d4ed8, #7c3aed);
+      color: white;
+      padding: 24px 18px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before,
+    header::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.18;
+    }
+
+    header::before {
+      width: 220px;
+      height: 220px;
+      background: #ffffff;
+      top: -60px;
+      right: -80px;
+    }
+
+    header::after {
+      width: 160px;
+      height: 160px;
+      background: #facc15;
+      bottom: -60px;
+      left: -40px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+
+    .college {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      opacity: 0.95;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+      background: rgba(255,255,255,0.15);
+      padding: 6px;
+      border-radius: 999px;
+      backdrop-filter: blur(6px);
+    }
+
+    .lang-switch button {
+      border: none;
+      background: transparent;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: 0.3s;
+    }
+
+    .lang-switch button.active,
+    .lang-switch button:hover {
+      background: white;
+      color: #1d4ed8;
+    }
+
+    .hero {
+      text-align: center;
+      padding-top: 28px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-size: 2.3rem;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      opacity: 0.96;
+    }
+
+    .creator-box {
+      margin-top: 20px;
+      background: rgba(255,255,255,0.15);
+      padding: 14px 18px;
+      border-radius: 16px;
+      display: inline-block;
+      font-size: 0.96rem;
+      line-height: 1.7;
+      backdrop-filter: blur(6px);
+    }
+
+    .section {
+      width: min(1180px, 94%);
+      margin: 34px auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: #0f172a;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #475569;
+      max-width: 900px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    .task-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(255,255,255,0.6);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
+      backdrop-filter: blur(10px);
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 18px 40px rgba(30, 41, 59, 0.14);
+    }
+
+    .icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+      color: #0f172a;
+    }
+
+    .card p {
+      color: #475569;
+      line-height: 1.65;
+      font-size: 0.96rem;
+      margin-bottom: 14px;
+    }
+
+    .tool-name {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #dbeafe, #ede9fe);
+      color: #1e3a8a;
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .prompt-box {
+      background: #f8fafc;
+      border-left: 5px solid #7c3aed;
+      border-radius: 14px;
+      padding: 14px;
+      font-size: 0.94rem;
+      color: #334155;
+      line-height: 1.6;
+      margin-bottom: 14px;
+      min-height: 110px;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      padding: 11px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: 0.25s;
+      font-size: 0.93rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.92;
+      transform: scale(1.02);
+    }
+
+    .btn-secondary {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .btn-secondary:hover {
+      background: #cbd5e1;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 18px;
+    }
+
+    .info-card {
+      background: white;
+      padding: 22px;
+      border-radius: 20px;
+      box-shadow: 0 10px 28px rgba(15,23,42,0.07);
+    }
+
+    .info-card h4 {
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+      color: #0f172a;
+    }
+
+    .info-card ul {
+      padding-left: 18px;
+      line-height: 1.8;
+      color: #475569;
+    }
+
+    .form-wrap {
+      background: linear-gradient(135deg, #ffffff, #f8faff);
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 12px 32px rgba(15,23,42,0.08);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+      outline: none;
+      font-size: 0.96rem;
+      background: #fff;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #7c3aed;
+      box-shadow: 0 0 0 3px rgba(124,58,237,0.12);
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .form-actions {
+      margin-top: 18px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .success-msg {
+      color: #166534;
+      font-weight: 700;
+      margin-top: 10px;
+    }
+
+    .warning-box {
+      background: linear-gradient(135deg, #fff7ed, #fef3c7);
+      border-left: 5px solid #f59e0b;
+      padding: 18px;
+      border-radius: 16px;
+      line-height: 1.7;
+      color: #7c2d12;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 26px 16px;
+      margin-top: 42px;
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    .small {
+      font-size: 0.92rem;
+      color: #cbd5e1;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 1.75rem;
+      }
+      .section-title {
+        font-size: 1.6rem;
+      }
+      .creator-box {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="topbar">
+      <div class="college" id="collegeName">
+        Annapoorana Engineering College (An Autonomous Institution), Salem
+      </div>
+      <div class="lang-switch">
+        <button id="btn-en" class="active" onclick="setLanguage('en')">English</button>
+        <button id="btn-ta" onclick="setLanguage('ta')">தமிழ்</button>
+      </div>
+    </div>
+
+    <div class="hero">
+      <h1 id="heroTitle">AI Study Hub for +2 Students</h1>
+      <p id="heroSubtitle">
+        Choose your study task, copy the right prompt, and open the best AI tool instantly for board exam preparation.
+      </p>
+
+      <div class="creator-box" id="creatorInfo">
+        <strong>Website Created By:</strong> Prof.B.Nandhagopal, AP/Civil<br>
+        <strong>Contact No.:</strong> +91 8072813033<br>
+        <strong>Email:</strong> bnandhagopal@aecsalem.edu.in
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <h2 class="section-title" id="taskTitle">Choose Your Study Task</h2>
+    <p class="section-subtitle" id="taskSubtitle">
+      This website helps both English-medium and Tamil-medium students use AI in the right way for revision, understanding, and exam preparation.
+    </p>
+
+    <div class="task-grid" id="taskGrid"></div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title" id="whyTitle">Why This Website Helps Students</h2>
+    <p class="section-subtitle" id="whySubtitle">
+      It is designed especially for +2 students attending board exams now.
+    </p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h4 id="benefit1Title">Quick Revision</h4>
+        <ul id="benefit1List">
+          <li>Convert large lessons into short notes</li>
+          <li>Revise difficult chapters quickly</li>
+          <li>Get simple explanations in English or Tamil</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h4 id="benefit2Title">Better Practice</h4>
+        <ul id="benefit2List">
+          <li>Create MCQs and short questions</li>
+          <li>Generate structured board-exam answers</li>
+          <li>Prepare presentations and diagrams</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h4 id="benefit3Title">Smart AI Use</h4>
+        <ul id="benefit3List">
+          <li>Learn how to ask correct prompts</li>
+          <li>Use AI as a study assistant, not for blind copying</li>
+          <li>Combine AI with textbook and class notes</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title" id="warningTitle">Important Student Advice</h2>
+    <div class="warning-box" id="warningText">
+      Use AI to understand, revise, and practice. Do not copy blindly. Always verify formulas, facts, and numbers from your textbook, class notes, or teacher guidance.
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="form-wrap">
+      <h2 class="section-title" id="formTitle">Free Scholarship Aptitude Test Registration</h2>
+      <p class="section-subtitle" id="formSubtitle">
+        Students can register here to receive information about the scholarship aptitude test.
+      </p>
+
+      <form id="registrationForm">
+        <div class="form-grid">
+          <div>
+            <label id="labelName" for="name">Student Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div>
+            <label id="labelSchool" for="school">School Name</label>
+            <input type="text" id="school" name="school" required>
+          </div>
+          <div>
+            <label id="labelMedium" for="medium">Medium</label>
+            <select id="medium" name="medium" required>
+              <option value="">Select</option>
+              <option value="English Medium">English Medium</option>
+              <option value="Tamil Medium">Tamil Medium</option>
+            </select>
+          </div>
+          <div>
+            <label id="labelPhone" for="phone">Mobile Number</label>
+            <input type="tel" id="phone" name="phone" required>
+          </div>
+          <div>
+            <label id="labelGroup" for="group">Group / Stream</label>
+            <input type="text" id="group" name="group" placeholder="Bio-Maths / Computer Science / Commerce">
+          </div>
+          <div>
+            <label id="labelDistrict" for="district">District</label>
+            <input type="text" id="district" name="district">
+          </div>
+        </div>
+
+        <div style="margin-top:16px;">
+          <label id="labelMessage" for="message">Message / Interest</label>
+          <textarea id="message" name="message" placeholder="I want scholarship test details..."></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="submitBtn">Register Now</button>
+          <button type="reset" class="btn btn-secondary" id="resetBtn">Reset</button>
+        </div>
+
+        <div class="success-msg" id="responseMsg"></div>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div id="footerCollege">Annapoorana Engineering College (An Autonomous Institution), Salem</div>
+    <div id="footerCreator">Website Created By: Prof.B.Nandhagopal, AP/Civil</div>
+    <div class="small" id="footerContact">
+      Contact No. +91 8072813033 | Email: bnandhagopal@aecsalem.edu.in
+    </div>
+  </footer>
+
+  <script>
+    const toolsData = {
+      en: [
+        {
+          icon: "📝",
+          title: "Create Notes",
+          desc: "Generate short revision notes for any chapter in simple language.",
+          tool: "ChatGPT",
+          prompt: "Create short board-exam notes for the chapter Electrochemistry in simple English.",
+          url: "https://chatgpt.com/"
+        },
+        {
+          icon: "📚",
+          title: "Create Notes from Existing Notes",
+          desc: "Upload your class notes or PDF and convert them into clean revision notes.",
+          tool: "NotebookLM",
+          prompt: "Using these uploaded notes, make revision notes for board exam preparation.",
+          url: "https://notebooklm.google.com/"
+        },
+        {
+          icon: "🧠",
+          title: "Create Mind Map",
+          desc: "Turn a lesson into a visual mind map for faster memory and recall.",
+          tool: "NotebookLM / Napkin AI",
+          prompt: "Create a mind map for the chapter Reproductive Health.",
+          url: "https://www.napkin.ai/"
+        },
+        {
+          icon: "📊",
+          title: "Create Presentation",
+          desc: "Generate an attractive student-friendly presentation for a topic.",
+          tool: "Gamma",
+          prompt: "Create a student-friendly presentation on Semiconductor Electronics.",
+          url: "https://gamma.app/"
+        },
+        {
+          icon: "🎥",
+          title: "Create Video Presentation",
+          desc: "Make a quick visual overview for chapter revision and concept learning.",
+          tool: "NotebookLM",
+          prompt: "Create a video overview for this chapter for board exam revision.",
+          url: "https://notebooklm.google.com/"
+        },
+        {
+          icon: "❓",
+          title: "Ask Doubts",
+          desc: "Get difficult concepts explained in simple English or Tamil step by step.",
+          tool: "ChatGPT",
+          prompt: "Explain Kirchhoff’s law in very simple English for a +2 student.",
+          url: "https://chatgpt.com/"
+        },
+        {
+          icon: "🔁",
+          title: "Translate Tamil ↔ English",
+          desc: "Convert answers and explanations between Tamil and English.",
+          tool: "ChatGPT",
+          prompt: "Translate this +2 answer into simple Tamil and then into exam-friendly English.",
+          url: "https://chatgpt.com/"
+        },
+        {
+          icon: "✅",
+          title: "Generate MCQs",
+          desc: "Create practice multiple-choice questions for board exam revision.",
+          tool: "ChatGPT",
+          prompt: "Generate 10 important MCQs from Ray Optics for +2 board exam students.",
+          url: "https://chatgpt.com/"
+        }
+      ],
+      ta: [
+        {
+          icon: "📝",
+          title: "குறிப்புகள் உருவாக்க",
+          desc: "எந்த அத்தியாயத்திற்கும் எளிய மொழியில் குறும் மீள்பார்வை குறிப்புகள் உருவாக்குங்கள்.",
+          tool: "ChatGPT",
+          prompt: "Electrochemistry அத்தியாயத்திற்கு எளிய தமிழில் தேர்வு குறிப்பு தயாரிக்கவும்.",
+          url: "https://chatgpt.com/"
+        },
+        {
+          icon: "📚",
+          title: "இருக்கும் குறிப்புகளில் இருந்து குறிப்புகள் உருவாக்க",
+          desc: "உங்கள் class notes அல்லது PDF-ஐ upload செய்து சுத்தமான revision notes உருவாக்குங்கள்.",
+          tool: "NotebookLM",
+          prompt: "இந்த பதிவேற்றிய குறிப்புகளை பயன்படுத்தி board exam revision notes உருவாக்கவும்.",
+          url: "https://notebooklm.google.com/"
+        },
+        {
+          icon: "🧠",
+          title: "Mind Map உருவாக்க",
+          desc: "ஒரு பாடத்தை நினைவில் நிற்கும் visual mind map ஆக மாற்றுங்கள்.",
+          tool: "NotebookLM / Napkin AI",
+          prompt: "Reproductive Health அத்தியாயத்திற்கு ஒரு mind map உருவாக்கவும்.",
+          url: "https://www.napkin.ai/"
+        },
+        {
+          icon: "📊",
+          title: "Presentation உருவாக்க",
+          desc: "ஒரு topic-க்கு மாணவர்களுக்கு ஏற்ற அழகான presentation உருவாக்குங்கள்.",
+          tool: "Gamma",
+          prompt: "Semiconductor Electronics அத்தியாயத்திற்கு மாணவர்களுக்கு ஏற்ற presentation உருவாக்கவும்.",
+          url: "https://gamma.app/"
+        },
+        {
+          icon: "🎥",
+          title: "Video Presentation உருவாக்க",
+          desc: "அத்தியாய மீள்பார்வைக்காக விரைவான video overview உருவாக்குங்கள்.",
+          tool: "NotebookLM",
+          prompt: "இந்த அத்தியாயத்திற்கு தேர்வு மீள்பார்வைக்கான video overview உருவாக்கவும்.",
+          url: "https://notebooklm.google.com/"
+        },
+        {
+          icon: "❓",
+          title: "சந்தேகம் கேட்க",
+          desc: "கடினமான கருத்துகளை எளிய தமிழ் அல்லது ஆங்கிலத்தில் படிப்படியாக விளக்கம் பெறுங்கள்.",
+          tool: "ChatGPT",
+          prompt: "+2 மாணவருக்குப் புரியும் வகையில் Kirchhoff விதியை எளிய தமிழில் விளக்கவும்.",
+          url: "https://chatgpt.com/"
+        },
+        {
+          icon: "🔁",
+          title: "தமிழ் ↔ ஆங்கிலம் மாற்றம்",
+          desc: "பதில்கள் மற்றும் விளக்கங்களை தமிழ் மற்றும் ஆங்கிலம் இடையே மாற்றுங்கள்.",
+          tool: "ChatGPT",
+          prompt: "இந்த +2 பதிலை எளிய தமிழிலும், தேர்வுக்கு ஏற்ற ஆங்கிலத்திலும் மாற்றவும்.",
+          url: "https://chatgpt.com/"
+        },
+        {
+          icon: "✅",
+          title: "MCQ உருவாக்க",
+          desc: "தேர்வு மீள்பார்வைக்கான multiple choice questions உருவாக்குங்கள்.",
+          tool: "ChatGPT",
+          prompt: "Ray Optics அத்தியாயத்தில் இருந்து +2 மாணவர்களுக்கு 10 முக்கிய MCQ உருவாக்கவும்.",
+          url: "https://chatgpt.com/"
+        }
+      ]
+    };
+
+    let currentLang = "en";
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.getElementById("btn-en").classList.toggle("active", lang === "en");
+      document.getElementById("btn-ta").classList.toggle("active", lang === "ta");
+
+      if (lang === "en") {
+        document.getElementById("heroTitle").innerText = "AI Study Hub for +2 Students";
+        document.getElementById("heroSubtitle").innerText = "Choose your study task, copy the right prompt, and open the best AI tool instantly for board exam preparation.";
+        document.getElementById("taskTitle").innerText = "Choose Your Study Task";
+        document.getElementById("taskSubtitle").innerText = "This website helps both English-medium and Tamil-medium students use AI in the right way for revision, understanding, and exam preparation.";
+        document.getElementById("whyTitle").innerText = "Why This Website Helps Students";
+        document.getElementById("whySubtitle").innerText = "It is designed especially for +2 students attending board exams now.";
+        document.getElementById("benefit1Title").innerText = "Quick Revision";
+        document.getElementById("benefit1List").innerHTML = `
+          <li>Convert large lessons into short notes</li>
+          <li>Revise difficult chapters quickly</li>
+          <li>Get simple explanations in English or Tamil</li>`;
+        document.getElementById("benefit2Title").innerText = "Better Practice";
+        document.getElementById("benefit2List").innerHTML = `
+          <li>Create MCQs and short questions</li>
+          <li>Generate structured board-exam answers</li>
+          <li>Prepare presentations and diagrams</li>`;
+        document.getElementById("benefit3Title").innerText = "Smart AI Use";
+        document.getElementById("benefit3List").innerHTML = `
+          <li>Learn how to ask correct prompts</li>
+          <li>Use AI as a
