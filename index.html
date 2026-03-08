@@ -489,52 +489,53 @@
         Students can register here for scholarship aptitude test details. Responses will go to Google Form and Google Sheet.
       </p>
 
-      <form id="registrationForm">
-        <div class="grid">
-          <div>
-            <label id="labelName" for="name">Student Name</label>
-            <input type="text" id="name" required />
-          </div>
+      <form action="https://docs.google.com/forms/d/e/1FAIpQLSdZyusli8aoJXrvs64VFisowlYFrrsvl9Q1BI1mOsGtiQfOnQ/formResponse" method="POST" target="_blank">
 
-          <div>
-            <label id="labelSchool" for="school">School Name</label>
-            <input type="text" id="school" required />
-          </div>
+<div class="grid">
 
-          <div>
-            <label id="labelMedium" for="medium">Medium</label>
-            <select id="medium" required>
-              <option value="">Select</option>
-              <option value="English">English</option>
-              <option value="Tamil">Tamil</option>
-            </select>
-          </div>
+<div>
+<label>Student Name</label>
+<input type="text" name="entry.983033617" required>
+</div>
 
-          <div>
-            <label id="labelPhone" for="phone">Mobile Number</label>
-            <input type="tel" id="phone" required />
-          </div>
+<div>
+<label>School Name</label>
+<input type="text" name="entry.801039746" required>
+</div>
 
-          <div>
-            <label id="labelGroup" for="group">Group / Stream</label>
-            <input type="text" id="group" placeholder="Bio-Maths / Computer Science / Commerce" />
-          </div>
+<div>
+<label>Medium</label>
+<select name="entry.1294393761" required>
+<option value="">Select</option>
+<option value="English">English</option>
+<option value="Tamil">Tamil</option>
+</select>
+</div>
 
-          <div>
-            <label id="labelDistrict" for="district">District</label>
-            <input type="text" id="district" />
-          </div>
-        </div>
+<div>
+<label>Mobile Number</label>
+<input type="tel" name="entry.682366574" required>
+</div>
 
-        <div class="btn-row" style="margin-top:16px;">
-          <button class="btn btn-primary" type="submit" id="submitBtn">Register Now</button>
-          <button class="btn btn-secondary" type="reset" id="resetBtn">Reset</button>
-          <a class="btn btn-secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSdZyusli8aoJXrvs64VFisowlYFrrsvl9Q1BI1mOsGtiQfOnQ/viewform" target="_blank" rel="noopener noreferrer" id="openGoogleFormBtn">Open Google Form</a>
-        </div>
+<div>
+<label>Group / Stream</label>
+<input type="text" name="entry.2031149044">
+</div>
 
-        <div id="formStatus" class="status"></div>
-        <div class="small-note" id="formNote">If auto submit does not work in some mobile browsers, tap “Open Google Form”.</div>
-      </form>
+<div>
+<label>District</label>
+<input type="text" name="entry.2144771428">
+</div>
+
+</div>
+
+<div class="btn-row" style="margin-top:16px;">
+<button class="btn btn-primary" type="submit">Register Now</button>
+<button class="btn btn-secondary" type="reset">Reset</button>
+<a class="btn btn-secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSdZyusli8aoJXrvs64VFisowlYFrrsvl9Q1BI1mOsGtiQfOnQ/viewform" target="_blank">Open Google Form</a>
+</div>
+
+</form>
     </section>
   </main>
 
