@@ -68,6 +68,13 @@
       opacity: 0.95;
     }
 
+    .brand-address {
+      margin-top: 8px;
+      font-size: 15px;
+      line-height: 1.6;
+      font-weight: 600;
+    }
+
     .logo-box, .accreditation-box {
       display: flex;
       align-items: center;
@@ -84,17 +91,6 @@
       border-radius: 14px;
       padding: 6px;
       box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-    }
-
-    .creator {
-      max-width: 780px;
-      margin: 18px auto 0;
-      text-align: center;
-      background: rgba(255,255,255,0.14);
-      border-radius: 18px;
-      padding: 14px;
-      line-height: 1.8;
-      font-size: 15px;
     }
 
     .container {
@@ -171,6 +167,7 @@
       line-height: 1.65;
       font-size: 14px;
       color: #334155;
+      white-space: pre-wrap;
     }
 
     .btn-row {
@@ -208,26 +205,6 @@
       margin-top: 24px;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-    }
-
-    label {
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 12px;
-      margin-top: 6px;
-      border: 1px solid #cbd5e1;
-      border-radius: 10px;
-      font-size: 14px;
-    }
-
     .info-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -239,9 +216,12 @@
       padding: 20px;
       border-radius: 18px;
       box-shadow: 0 8px 20px rgba(15,23,42,0.06);
+      border: 1px solid #eef2ff;
     }
 
-    .info-card h4 { margin: 0 0 10px; }
+    .info-card h4 {
+      margin: 0 0 10px;
+    }
 
     .info-card ul {
       margin: 0;
@@ -276,17 +256,11 @@
       line-height: 1.8;
     }
 
-    .small-note {
-      text-align: center;
-      color: #64748b;
-      margin-top: 8px;
-      font-size: 13px;
-    }
-
     @media (max-width: 900px) {
       .brand { grid-template-columns: 1fr; }
       .brand-title { font-size: 28px; }
       .brand-sub { font-size: 16px; }
+      .brand-address { font-size: 14px; }
     }
   </style>
 </head>
@@ -305,7 +279,9 @@
       <div class="brand-center">
         <h1 id="collegeTitle" class="brand-title">Annapoorana Engineering College</h1>
         <div id="collegeSubtitle" class="brand-sub">(An Autonomous Institution)</div>
-        <strong> Sankari Main Rd, Periya Seeragapadi, Salem, Tamil Nadu 636308<br>
+        <div id="collegeAddress" class="brand-address">
+          Sankari Main Rd, Periya Seeragapadi, Salem, Tamil Nadu 636308
+        </div>
       </div>
 
       <div class="accreditation-box">
@@ -478,27 +454,25 @@
       </div>
     </section>
 
-   <section class="panel">
-    <div class="btn-row" style="margin-to<section class="panel">
-  <h2 id="registerTitle" class="section-title">Register for Scholarship Exam in Annapoorana Engineering College</h2>
-  <p id="registerSubtitle" class="section-subtitle">
-    Limited Seats only Available
-  </p>
-  <div style="text-align:center; margin-top:20px;">
-    <a
-      id="registerBtn"
-      class="btn btn-primary"
-      href="https://docs.google.com/forms/d/e/1FAIpQLSdZyusli8aoJXrvs64VFisowlYFrrsvl9Q1BI1mOsGtiQfOnQ/viewform"
-      target="_blank"
-      rel="noopener noreferrer"
-      style="padding:14px 26px; font-size:16px;"
-    >
-      Register Now
-    </a>
-  </div>
-    <div id="formStatus" class="status"></div>
-  </form>
-</section>
+    <section class="panel">
+      <h2 id="registerTitle" class="section-title">Register for Scholarship Exam in Annapoorana Engineering College</h2>
+      <p id="registerSubtitle" class="section-subtitle">
+        Limited Seats only Available
+      </p>
+      <div style="text-align:center; margin-top:20px;">
+        <a
+          id="registerBtn"
+          class="btn btn-primary"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSdZyusli8aoJXrvs64VFisowlYFrrsvl9Q1BI1mOsGtiQfOnQ/viewform"
+          target="_blank"
+          rel="noopener noreferrer"
+          style="padding:14px 26px; font-size:16px;"
+        >
+          Register Now
+        </a>
+      </div>
+      <div id="formStatus" class="status"></div>
+    </section>
   </main>
 
   <footer>
@@ -508,16 +482,7 @@
   </footer>
 
   <script>
-    const GOOGLE_FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSdZyusli8aoJXrvs64VFisowlYFrrsvl9Q1BI1mOsGtiQfOnQ/formResponse";
-
-    const FORM_FIELDS = {
-      name: "entry.983033617",
-      school: "entry.801039746",
-      medium: "entry.1294393761",
-      phone: "entry.682366574",
-      group: "entry.2031149044",
-      district: "entry.2144771428"
-    };
+    let currentLang = "en";
 
     function copyPrompt(id) {
       const text = document.getElementById(id).innerText;
@@ -528,9 +493,10 @@
       });
     }
 
-    let currentLang = "en";
-
     const enText = {
+      collegeTitle: "Annapoorana Engineering College",
+      collegeSubtitle: "(An Autonomous Institution)",
+      collegeAddress: "Sankari Main Rd, Periya Seeragapadi, Salem, Tamil Nadu 636308",
       heroTitle: "AI Study Hub for +2 Students",
       heroSubtitle: "Choose what you want to do, copy the ready prompt, and open the correct AI tool instantly.",
       whyTitle: "Why this is useful",
@@ -543,55 +509,40 @@
       benefit3List: "<li>Learn how to ask properly</li><li>Use AI for understanding, not blind copying</li><li>Study with textbook and class notes</li>",
       warningTitle: "Important Note for Students",
       warningText: "Use AI for understanding, revision, and practice. Don’t just copy and paste. Always check formulas, definitions, and important facts with your textbook or teacher.",
-      formTitle: "Scholarship Test Registration",
-      formSubtitle: "Students can register here for scholarship aptitude test details. Responses will go to Google Form and Google Sheet.",
-      labelName: "Student Name",
-      labelSchool: "School Name",
-      labelMedium: "Medium",
-      labelPhone: "Mobile Number",
-      labelGroup: "Group / Stream",
-      labelDistrict: "District",
-      submitBtn: "Register Now",
-      resetBtn: "Reset",
-      openGoogleFormBtn: "Open Google Form",
-      formNote: "If auto submit does not work in some mobile browsers, tap “Open Google Form”.",
+      registerTitle: "Register for Scholarship Exam in Annapoorana Engineering College",
+      registerSubtitle: "Limited Seats only Available",
+      registerBtn: "Register Now",
       copyLabel: "Copy Prompt",
       openLabel: "Open Tool",
-      statusSubmitting: "Submitting...",
-      statusSuccess: "Registration submitted successfully.",
-      statusFail: "Submission failed. Open Google Form directly."
+      footerCollege: "Annapoorana Engineering College (An Autonomous Institution), Salem",
+      footerCreator: "Website Created By: Prof.B.Nandhagopal, AP/Civil",
+      footerContact: "Contact No. +91 8072813033 | Email: bnandhagopal@aecsalem.edu.in"
     };
 
     const taText = {
-      heroTitle: "+2 Students-kana AI Study Hub",
-      heroSubtitle: "Enna செய்யணுமோ அதை choose பண்ணுங்க, ready prompt-a copy பண்ணி correct tool-a open பண்ணுங்க.",
-      whyTitle: "Ithu eppadi useful",
-      whySubtitle: "Board exam prepare பண்ணுற +2 students-kaga தான் இது specially செய்யப்பட்டுள்ளது.",
-      benefit1Title: "Quick Revision",
-      benefit1List: "<li>Periya lessons short notes ஆக மாறும்</li><li>Kashtamana topics quick-ah revise பண்ணலாம்</li><li>Easy English அல்லது spoken Tamil-la purinjukkalam</li>",
-      benefit2Title: "Better Practice",
-      benefit2List: "<li>MCQ மற்றும் important questions செய்யலாம்</li><li>Better answer structure prepare பண்ணலாம்</li><li>Slides, mind map, visuals செய்யலாம்</li>",
-      benefit3Title: "Smart AI Use",
-      benefit3List: "<li>Correct-ah எப்படி கேட்கணும் என்று தெரிஞ்சுக்கலாம்</li><li>AI-யை copy அடிக்காமல், purinjukka use பண்ணலாம்</li><li>Textbook மற்றும் class notes உடன் சேர்த்து படிக்கலாம்</li>",
-      warningTitle: "Students-kku Important Note",
-      warningText: "AI-யை purinjukka, revise பண்ண, practice பண்ண use பண்ணுங்க. Just copy paste மட்டும் பண்ணாதீங்க. Formula, definition, important facts எல்லாத்தையும் textbook அல்லது teacher kitte check பண்ணுங்க.",
-      formTitle: "Scholarship Test Registration",
-      formSubtitle: "Scholarship aptitude test details-kaga inga register pannalam. Responses Google Form and Google Sheet-ku pogum.",
-      labelName: "Student Name",
-      labelSchool: "School Name",
-      labelMedium: "Medium",
-      labelPhone: "Mobile Number",
-      labelGroup: "Group / Stream",
-      labelDistrict: "District",
-      submitBtn: "Register பண்ணு",
-      resetBtn: "Reset",
-      openGoogleFormBtn: "Google Form open பண்ணு",
-      formNote: "Auto submit சில mobile browsers-la work ஆகலானா, “Google Form open பண்ணு” button use பண்ணுங்க.",
-      copyLabel: "Prompt copy பண்ணு",
-      openLabel: "Tool open பண்ணு",
-      statusSubmitting: "Submitting...",
-      statusSuccess: "Registration success-a submit ஆயிடுச்சு.",
-      statusFail: "Submit ஆகலை. Google Form-a direct-a open pannunga."
+      collegeTitle: "அன்னபூரணா பொறியியல் கல்லூரி",
+      collegeSubtitle: "(தன்னாட்சி கல்வி நிறுவனம்)",
+      collegeAddress: "NH544, சங்கரி மெயின் ரோடு, பெரிய சீரகாபாடி, சேலம், தமிழ்நாடு-636308",
+      heroTitle: "+2 மாணவர்களுக்கான AI Study Hub",
+      heroSubtitle: "என்ன செய்ய வேண்டும் என்பதை தேர்வு பண்ணுங்க, ready prompt-ஐ copy பண்ணி, சரியான AI tool-ஐ உடனே open பண்ணுங்க.",
+      whyTitle: "இது எப்படி பயனுள்ளதாக இருக்கும்",
+      whySubtitle: "Board exam-க்கு தயாராகும் +2 மாணவர்களுக்காக இது தனித்துவமாக உருவாக்கப்பட்டுள்ளது.",
+      benefit1Title: "வேகமான ரிவிசன்",
+      benefit1List: "<li>பெரிய lessons ஐ சிறிய notes ஆக மாற்றலாம்</li><li>கஷ்டமான topics-ஐ சீக்கிரம் revise பண்ணலாம்</li><li>Easy English அல்லது spoken Tamil-ல் புரிந்துகொள்ளலாம்</li>",
+      benefit2Title: "சிறந்த Practice",
+      benefit2List: "<li>MCQ மற்றும் important questions உருவாக்கலாம்</li><li>நல்ல வரையறுக்கப்பட்ட விடைகளை தயார் பண்ணலாம்</li><li>Slides, mind maps, visuals உருவாக்கலாம்</li>",
+      benefit3Title: "AI-யை Smart-ஆ use பண்ணுவது",
+      benefit3List: "<li>சரியாக எப்படி கேட்க வேண்டும் என்று கற்றுக்கொள்ளலாம்</li><li>AI-யை copy அடிக்காமல் புரிந்துகொள்ள use பண்ணலாம்</li><li> பாடப்புத்தகம் மற்றும் class notes உடன் சேர்த்து படிக்கலாம்</li>",
+      warningTitle: "மாணவர்களுக்கு முக்கிய குறிப்பு",
+      warningText: "AI-யை புரிந்துகொள்ள, revise பண்ண, practice பண்ண use பண்ணுங்க. Just copy paste மட்டும் பண்ணாதீங்க. Formula, definition, important facts எல்லாத்தையும் பாடப்புத்தகம் அல்லது ஆசிரியர் கிட்ட check பண்ணுங்க.",
+      registerTitle: "அன்னபூரணா பொறியியல் கல்லூரி Scholarship Exam பதிவு",
+      registerSubtitle: "குறைந்த எண்ணிக்கையிலான இடங்கள் மட்டும் உள்ளன",
+      registerBtn: "இப்போது பதிவு செய்யவும்",
+      copyLabel: "Prompt copy பண்ணுங்க",
+      openLabel: "Tool open பண்ணுங்க",
+      footerCollege: "அன்னபூரணா பொறியியல்  கல்லூரி (தன்னாட்சி கல்வி நிறுவனம்), சேலம்",
+      footerCreator: "இணையதளம் உருவாக்கியது: பேரா. பி. நந்தகோபால், உதவி பேராசிரியர் / சிவில்",
+      footerContact: "தொடர்பு எண்: +91 8072813033 | மின்னஞ்சல்: bnandhagopal@aecsalem.edu.in"
     };
 
     const cardText = {
@@ -608,16 +559,16 @@
         10: ["Ask Doubts / Translate Answers", "If something is confusing, ask here and get simple explanation in English or spoken Tamil.", "Explain Kirchhoff law in very simple English and then in easy spoken Tamil for a +2 student."]
       },
       ta: {
-        1: ["Notes செய்ய", "Oru lesson-ku quick-ah short notes வேணும்னா இதைப் use பண்ணலாம்.", "Electrochemistry lesson-ku easy-a short board exam notes prepare pannunga."],
-        2: ["Already இருக்கும் notes-லிருந்து notes செய்ய", "Unga class notes அல்லது PDF இருந்தா அதுலிருந்து neat-a revision notes செய்யலாம்.", "Indha uploaded notes use panni neat-a board exam revision notes create pannunga."],
-        3: ["MCQ செய்ய", "Practice-kaga chapter-la இருந்து MCQ create பண்ண இதைப் use பண்ணலாம்.", "Ray Optics chapter-la இருந்து 15 board exam style MCQ answer key-oda create pannunga."],
-        4: ["Important Questions செய்ய", "2 mark, 3 mark, 5 mark important questions வேணும்னா use பண்ணலாம்.", "Current Electricity chapter-la இருந்து important 2 mark, 3 mark, 5 mark questions kudunga."],
-        5: ["Mind Map செய்ய", "Oru chapter easy-a நினைவில் வைக்க mind map use பண்ணலாம்.", "Reproductive Health chapter-ku simple mind map create pannunga."],
-        6: ["Biology Diagram செய்ய", "Biology diagram அல்லது process visual வேணும்னா இதைப் use பண்ணலாம்.", "Human heart blood circulation-ku clean-a labelled diagram style visual create pannunga for +2 biology students."],
-        7: ["Physics Formula புரிஞ்சுக்க", "Formula step by step puriyanum-na use பண்ணலாம்.", "V = IR formula-la ஒவ்வொரு term meaning, unit, ஒரு easy example-oda simple-a explain pannunga for +2 students."],
-        8: ["Presentation செய்ய", "Seminar அல்லது class presentation வேணும்னா இதைப் use பண்ணலாம்.", "Semiconductor Electronics topic-ku student-friendly presentation simple explanation and key points-oda create pannunga."],
-        9: ["Video Presentation செய்ய", "Oru lesson visual-a புரிஞ்சுக்கணும்னா இது help ஆகும்.", "Indha chapter-ku short revision video overview create pannunga for last minute understanding."],
-        10: ["Doubt கேட்க / Translate செய்ய", "Puriyala-na இங்க கேளுங்க. English-லும் spoken Tamil-lum explain பண்ணி தரும்.", "Kirchhoff law-a very simple English-la explain pannunga, appuram easy spoken Tamil-la explain pannunga for a +2 student."]
+        1: ["Notes செய்ய", "ஒரு lesson-க்கு quick-ah short notes வேணும்னா இதை use பண்ணலாம்.", "Electrochemistry chapter-க்கு easy-a short board exam notes prepare pannunga."],
+        2: ["இருக்கும் notes-லிருந்து notes செய்ய", "உங்க class notes அல்லது PDF இருந்தா அதுலிருந்து neat-a revision notes செய்யலாம்.", "இந்த uploaded notes use பண்ணி neat-a board exam revision notes create pannunga."],
+        3: ["MCQ செய்ய", "Practice-க்காக chapter-ல இருந்து MCQ create பண்ண இதை use பண்ணலாம்.", "Ray Optics chapter-ல இருந்து 15 board exam style MCQ answer key-உடன் create pannunga."],
+        4: ["Important Questions செய்ய", "2 mark, 3 mark, 5 mark important questions வேணும்னா இதை use பண்ணலாம்.", "Current Electricity chapter-ல இருந்து important 2 mark, 3 mark, 5 mark questions kudunga."],
+        5: ["Mind Map செய்ய", "ஒரு chapter easy-a நினைவில் வைக்க mind map use பண்ணலாம்.", "Reproductive Health chapter-க்கு simple mind map create pannunga."],
+        6: ["Biology Diagram செய்ய", "Biology diagram அல்லது process visual வேணும்னா இதை use பண்ணலாம்.", "Human heart blood circulation-க்கு clean-a labelled diagram style visual create pannunga for +2 biology students."],
+        7: ["Physics Formula புரிஞ்சுக்க", "Formula step by step புரியணும்னா இதை use பண்ணலாம்.", "V = IR formula-வில் ஒவ்வொரு term meaning, unit, ஒரு easy example-உடன் simple-a explain pannunga for +2 students."],
+        8: ["Presentation செய்ய", "Seminar அல்லது class presentation வேணும்னா இதை use பண்ணலாம்.", "Semiconductor Electronics topic-க்கு student-friendly presentation simple explanation and key points-உடன் create pannunga."],
+        9: ["Video Presentation செய்ய", "ஒரு lesson visual-a புரிஞ்சுக்கணும்னா இது help ஆகும்.", "இந்த chapter-க்கு short revision video overview create pannunga for last minute understanding."],
+        10: ["Doubt கேட்க / Translate செய்ய", "புரியலனா இங்க கேளுங்க. English-லும் spoken Tamil-லும் explain பண்ணி தரும்.", "Kirchhoff law-a very simple English-la explain pannunga, appuram easy spoken Tamil-la explain pannunga for a +2 student."]
       }
     };
 
@@ -627,6 +578,10 @@
 
       document.getElementById("btn-en").classList.toggle("active", lang === "en");
       document.getElementById("btn-ta").classList.toggle("active", lang === "ta");
+
+      document.getElementById("collegeTitle").innerText = text.collegeTitle;
+      document.getElementById("collegeSubtitle").innerText = text.collegeSubtitle;
+      document.getElementById("collegeAddress").innerText = text.collegeAddress;
 
       document.getElementById("heroTitle").innerText = text.heroTitle;
       document.getElementById("heroSubtitle").innerText = text.heroSubtitle;
@@ -640,18 +595,12 @@
       document.getElementById("benefit3List").innerHTML = text.benefit3List;
       document.getElementById("warningTitle").innerText = text.warningTitle;
       document.getElementById("warningText").innerText = text.warningText;
-      document.getElementById("formTitle").innerText = text.formTitle;
-      document.getElementById("formSubtitle").innerText = text.formSubtitle;
-      document.getElementById("labelName").innerText = text.labelName;
-      document.getElementById("labelSchool").innerText = text.labelSchool;
-      document.getElementById("labelMedium").innerText = text.labelMedium;
-      document.getElementById("labelPhone").innerText = text.labelPhone;
-      document.getElementById("labelGroup").innerText = text.labelGroup;
-      document.getElementById("labelDistrict").innerText = text.labelDistrict;
-      document.getElementById("submitBtn").innerText = text.submitBtn;
-      document.getElementById("resetBtn").innerText = text.resetBtn;
-      document.getElementById("openGoogleFormBtn").innerText = text.openGoogleFormBtn;
-      document.getElementById("formNote").innerText = text.formNote;
+      document.getElementById("registerTitle").innerText = text.registerTitle;
+      document.getElementById("registerSubtitle").innerText = text.registerSubtitle;
+      document.getElementById("registerBtn").innerText = text.registerBtn;
+      document.getElementById("footerCollege").innerText = text.footerCollege;
+      document.getElementById("footerCreator").innerText = text.footerCreator;
+      document.getElementById("footerContact").innerText = text.footerContact;
 
       for (let i = 1; i <= 10; i++) {
         document.getElementById("title" + i).innerText = cardText[lang][i][0];
@@ -661,37 +610,6 @@
         document.getElementById("open" + i).innerText = text.openLabel;
       }
     }
-
-    function buildFormData() {
-      const formData = new FormData();
-      formData.append(FORM_FIELDS.name, document.getElementById("name").value);
-      formData.append(FORM_FIELDS.school, document.getElementById("school").value);
-      formData.append(FORM_FIELDS.medium, document.getElementById("medium").value);
-      formData.append(FORM_FIELDS.phone, document.getElementById("phone").value);
-      formData.append(FORM_FIELDS.group, document.getElementById("group").value);
-      formData.append(FORM_FIELDS.district, document.getElementById("district").value);
-      return formData;
-    }
-
-    document.getElementById("registrationForm").addEventListener("submit", async function (e) {
-      e.preventDefault();
-      const text = currentLang === "en" ? enText : taText;
-      const status = document.getElementById("formStatus");
-      status.textContent = text.statusSubmitting;
-
-      try {
-        await fetch(GOOGLE_FORM_ACTION, {
-          method: "POST",
-          mode: "no-cors",
-          body: buildFormData()
-        });
-
-        status.textContent = text.statusSuccess;
-        document.getElementById("registrationForm").reset();
-      } catch (error) {
-        status.textContent = text.statusFail;
-      }
-    });
 
     document.getElementById("btn-en").addEventListener("click", function () {
       applyLanguage("en");
