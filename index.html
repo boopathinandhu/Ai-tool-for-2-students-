@@ -481,53 +481,58 @@
    <section class="panel">
   <h2 id="formTitle" class="section-title">Scholarship Test Registration</h2>
   <p id="formSubtitle" class="section-subtitle">
-    Students can register here for scholarship aptitude test details. Responses will go to Google Form and Google Sheet.
-  </p>
+    Students can register here for scholar<form id="registrationForm" action="https://docs.google.com/forms/d/e/1FAIpQLSdZyusli8aoJXrvs64VFisowlYFrrsvl9Q1BI1mOsGtiQfOnQ/formResponse" method="POST" target="_blank">
+  <div class="grid">
 
-  <form id="registrationForm" action="https://docs.google.com/forms/d/e/1FAIpQLSdZyusli8aoJXrvs64VFisowlYFrrsvl9Q1BI1mOsGtiQfOnQ/formResponse" method="POST" target="_blank">
-    <div class="grid">
-
-      <div>
-        <label id="labelName">Student Name</label>
-        <input id="name" type="text" name="entry.983033617" required>
-      </div>
-
-      <div>
-        <label id="labelSchool">School Name</label>
-        <input id="school" type="text" name="entry.801039746" required>
-      </div>
-
-      <div>
-        <label id="labelMedium">Medium</label>
-        <select id="medium" name="entry.1294393761" required>
-          <option value="">Select</option>
-          <option value="English">English</option>
-          <option value="Tamil">Tamil</option>
-        </select>
-      </div>
-
-      <div>
-        <label id="labelPhone">Mobile Number</label>
-        <input id="phone" type="tel" name="entry.682366574" required>
-      </div>
-
-      <div>
-        <label id="labelGroup">Group / Stream</label>
-        <select id="Group" name="entry.2031149044">
-          <option value="">Select</option>
-          <option value="Maths Biology"</option>Maths Biology</option>
-          <option value="Maths Computer Science">Maths Computer Science</option>
-          <option value="Vocational">Vocational</option>
-          <option value="Arts">Arts</option>
-          </select>
-      </div>
-
-      <div>
-        <label id="labelDistrict">District</label>
-        <input id="district" type="text" name="entry.2144771428">
-      </div>
-
+    <div>
+      <label id="labelName">Student Name</label>
+      <input id="name" type="text" name="entry.983033617" required>
     </div>
+
+    <div>
+      <label id="labelSchool">School Name</label>
+      <input id="school" type="text" name="entry.801039746" required>
+    </div>
+
+    <div>
+      <label id="labelMedium">Medium</label>
+      <select id="medium" name="entry.1294393761" required>
+        <option value="">Select</option>
+        <option value="English">English</option>
+        <option value="Tamil">Tamil</option>
+      </select>
+    </div>
+
+    <div>
+      <label id="labelPhone">Mobile Number</label>
+      <input id="phone" type="tel" name="entry.682366574" required>
+    </div>
+
+    <div>
+      <label id="labelGroup">Group / Stream</label>
+      <select id="group" name="entry.2031149044">
+        <option value="">Select</option>
+        <option value="Maths Biology">Maths Biology</option>
+        <option value="Maths Computer Science">Maths Computer Science</option>
+        <option value="Vocational">Vocational</option>
+        <option value="Arts">Arts</option>
+      </select>
+    </div>
+
+    <div>
+      <label id="labelDistrict">District</label>
+      <input id="district" type="text" name="entry.2144771428">
+    </div>
+
+  </div>
+
+  <div class="btn-row" style="margin-top:16px;">
+    <button class="btn btn-primary" type="submit">Register Now</button>
+    <button class="btn btn-secondary" type="reset">Reset</button>
+    <a class="btn btn-secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSdZyusli8aoJXrvs64VFisowlYFrrsvl9Q1BI1mOsGtiQfOnQ/viewform" target="_blank">Open Google Form</a>
+  </div>
+    </form>ship aptitude test details. Responses will go to Google Form and Google Sheet.
+  </p>
 
     <div class="btn-row" style="margin-top:16px;">
       <button id="submitBtn" class="btn btn-primary" type="submit">Register Now</button>
