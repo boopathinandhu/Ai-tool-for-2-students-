@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A career guidance website for +2 students and parents</title>
+  <style>
+    :root{
+      --bg:#eef4fb;
+      --surface:#ffffff;
+      --surface-2:#f7faff;
+      --text:#0f172a;
+      --muted:#52627a;
+      --primary:#0f62fe;
+      --primary-2:#7c3aed;
+      --accent:#00a3a3;
+      --warm:#ff8a00;
+      --border:rgba(15,23,42,.08);
+      --shadow:0 18px 40px rgba(15,23,42,.10);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(15,98,254,.08), transparent 22%),
+        radial-gradient(circle at top right, rgba(124,58,237,.08), transparent 26%),
+        linear-gradient(180deg,#f8fbff 0%, var(--bg) 100%);
+    }
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    .container{width:min(1220px,94%);margin:0 auto}
+
+    .topbar{
+      position:sticky;top:0;z-index:1000;
+      backdrop-filter:blur(14px);
+      background:rgba(6,18,40,.80);
+      border-bottom:1px solid rgba(255,255,255,.1);
+    }
+    .topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:12px;color:#fff}
+    .brand-badge{
+      width:54px;height:54px;border-radius:18px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--primary),var(--primary-2));
+      font-size:22px;font-weight:900;
+      box-shadow:0 10px 28px rgba(15,98,254,.35);
+    }
+    .brand h2{margin:0;font-size:18px;line-height:1.15}
+    .brand p{margin:2px 0 0;font-size:12px;color:rgba(255,255,255,.74)}
+    .top-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .pill-link,.lang-switch button{
+      border:none;border-radius:999px;padding:10px 14px;font-weight:800;cursor:pointer;
+    }
+    .pill-link{background:#fff;color:var(--primary)}
+    .lang-switch{display:flex;gap:6px;padding:4px;background:rgba(255,255,255,.08);border-radius:999px}
+    .lang-switch button{background:transparent;color:#fff}
+    .lang-switch button.active{background:#fff;color:var(--primary)}
+
+    .hero{padding:26px 0 16px}
+    .hero-wrap{
+      position:relative;overflow:hidden;border-radius:32px;box-shadow:var(--shadow);
+      background:#0b1730;color:#fff;
+      min-height:560px;
+    }
+    .slides{position:absolute;inset:0}
+    .slide{
+      position:absolute;inset:0;opacity:0;transition:opacity .8s ease;
+      background-size:cover;background-position:center;
+    }
+    .slide.active{opacity:1}
+    .slide::after{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(90deg, rgba(3,10,23,.78) 0%, rgba(4,17,41,.58) 38%, rgba(5,16,41,.18) 100%);
+    }
+    .slide.s1{background-image:url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1600&q=80')}
+    .slide.s2{background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80')}
+    .slide.s3{background-image:url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80')}
+    .slide.s4{background-image:url('https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1600&q=80')}
+
+    .hero-content{position:relative;z-index:2;padding:34px;display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:end;min-height:560px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.14);font-size:13px;font-weight:800}
+    h1{margin:14px 0 12px;font-size:clamp(30px,4.6vw,54px);line-height:1.05;max-width:720px}
+    .hero-text p{margin:0;max-width:690px;font-size:18px;line-height:1.8;color:rgba(255,255,255,.9)}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 18px;border-radius:14px;font-weight:800;border:1px solid transparent}
+    .btn-primary{background:#fff;color:var(--primary)}
+    .btn-ghost{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.18)}
+    .hero-side{display:grid;gap:14px}
+    .contact-card,.quick-card{
+      background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.15);border-radius:24px;padding:18px;
+      backdrop-filter:blur(8px);
+    }
+    .contact-card h3,.quick-card h3{margin:0 0 10px;font-size:18px}
+    .contact-list{display:grid;gap:10px}
+    .contact-item{display:flex;align-items:flex-start;gap:10px;color:rgba(255,255,255,.92);line-height:1.65}
+    .contact-item span:first-child{font-size:18px}
+    .quick-badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+    .quick-badges span{padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.12);font-weight:700;font-size:13px}
+    .slider-dots{position:absolute;left:34px;bottom:24px;z-index:3;display:flex;gap:8px}
+    .slider-dots button{width:12px;height:12px;border:none;border-radius:50%;background:rgba(255,255,255,.38);cursor:pointer}
+    .slider-dots button.active{background:#fff}
+
+    .main-tabs{padding:20px 0}
+    .tab-panel{background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow);border-radius:28px;overflow:hidden}
+    .tab-head{display:flex;gap:12px;flex-wrap:wrap;padding:18px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#fff,#f9fbff)}
+    .tab-btn{
+      border:none;background:#eef4ff;color:var(--primary);padding:12px 16px;border-radius:14px;font-weight:800;cursor:pointer;
+    }
+    .tab-btn.active{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;box-shadow:0 10px 20px rgba(15,98,254,.18)}
+    .tab-content{display:none;padding:24px}
+    .tab-content.active{display:block}
+    .intro-grid,.cards-grid,.info-grid,.tool-grid,.course-grid,.steps-grid,.stats-grid{display:grid;gap:18px}
+    .intro-grid{grid-template-columns:1.1fr .9fr}
+    .cards-grid{grid-template-columns:repeat(3,1fr)}
+    .info-grid{grid-template-columns:repeat(2,1fr)}
+    .tool-grid{grid-template-columns:repeat(2,1fr)}
+    .course-grid{grid-template-columns:300px 1fr;align-items:start}
+    .steps-grid{grid-template-columns:repeat(3,1fr)}
+    .stats-grid{grid-template-columns:repeat(4,1fr)}
+    .card{
+      background:var(--surface-2);border:1px solid var(--border);border-radius:22px;padding:18px;
+    }
+    .card h3,.card h4{margin:0 0 10px}
+    .card p{margin:0;color:var(--muted);line-height:1.75}
+    .muted{color:var(--muted)}
+    .section-title{margin:0 0 8px;font-size:30px}
+    .section-sub{margin:0 0 20px;color:var(--muted);line-height:1.75;max-width:900px}
+    .highlight{background:linear-gradient(135deg,#edf5ff,#f4edff)}
+    .mini-list{margin:0;padding-left:18px;line-height:1.9;color:var(--muted)}
+    .mini-list li+li{margin-top:4px}
+
+    .course-tabs{display:grid;gap:10px;position:sticky;top:88px}
+    .course-btn{
+      border:none;text-align:left;padding:14px 15px;border-radius:16px;background:#f2f6ff;color:var(--text);font-weight:800;cursor:pointer;
+      border:1px solid transparent;
+    }
+    .course-btn.active{background:#fff;border-color:rgba(15,98,254,.22);box-shadow:0 10px 20px rgba(15,98,254,.08);color:var(--primary)}
+    .course-content{display:none}
+    .course-content.active{display:block}
+    .course-header{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+    .course-badge{padding:8px 12px;border-radius:999px;background:#edf4ff;color:var(--primary);font-weight:800}
+    .topic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .topic{background:#fff;border:1px solid var(--border);border-radius:18px;padding:16px}
+    .topic h5{margin:0 0 8px;font-size:16px}
+    .topic ul{margin:0;padding-left:18px;line-height:1.8;color:var(--muted)}
+
+    .tool-card{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:flex-start}
+    .tool-logo{
+      width:58px;height:58px;border-radius:18px;display:grid;place-items:center;font-weight:900;font-size:20px;color:#fff;
+      background:linear-gradient(135deg,var(--primary),var(--primary-2));
+    }
+    .tool-logo.gemini{background:linear-gradient(135deg,#2563eb,#06b6d4)}
+    .tool-logo.copilot{background:linear-gradient(135deg,#7c3aed,#ec4899)}
+    .tool-logo.perplexity{background:linear-gradient(135deg,#0f766e,#22c55e)}
+    .tool-logo.canva{background:linear-gradient(135deg,#00c4cc,#7d2ae8)}
+    .tool-logo.grammarly{background:linear-gradient(135deg,#16a34a,#22c55e)}
+    .tool-logo.notebook{background:linear-gradient(135deg,#f59e0b,#ef4444)}
+    .tool-logo.khan{background:linear-gradient(135deg,#14b8a6,#0f766e)}
+    .tool-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .tool-head h3{margin:0}
+    .tool-link{font-weight:800;color:var(--primary)}
+    .tool-points{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+    .tool-points span{padding:7px 10px;border-radius:999px;background:#eef4ff;font-size:12px;font-weight:800;color:var(--primary)}
+    details{
+      background:#fff;border:1px solid var(--border);border-radius:18px;padding:14px 16px;
+    }
+    details+details{margin-top:10px}
+    summary{cursor:pointer;font-weight:800;list-style:none}
+    summary::-webkit-details-marker{display:none}
+    .step-list{margin:12px 0 0;padding-left:18px;color:var(--muted);line-height:1.9}
+
+    .contact-strip{margin-top:20px;padding:18px 20px;border-radius:20px;background:linear-gradient(135deg,#0f62fe,#7c3aed);color:#fff;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center}
+    .contact-strip h3{margin:0 0 6px}
+    .contact-strip p{margin:0;color:rgba(255,255,255,.9);line-height:1.7}
+    .contact-chip-wrap{display:flex;gap:10px;flex-wrap:wrap}
+    .contact-chip{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.12);font-weight:800}
+
+    footer{padding:24px 0 50px}
+    .footer-box{background:#081730;color:#fff;border-radius:28px;padding:24px}
+    .footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .footer-box p{color:rgba(255,255,255,.8);line-height:1.8}
+
+    @media (max-width:1000px){
+      .hero-content,.intro-grid,.course-grid,.footer-grid{grid-template-columns:1fr}
+      .cards-grid,.info-grid,.tool-grid,.steps-grid,.stats-grid,.topic-grid{grid-template-columns:1fr}
+      .course-tabs{position:static}
+      .hero-wrap,.hero-content{min-height:auto}
+    }
+    @media (max-width:680px){
+      .topbar-inner{align-items:flex-start;flex-direction:column}
+      .slider-dots{left:18px;bottom:18px}
+      .hero-content{padding:22px}
+      .tab-content{padding:18px}
+      h1{font-size:34px}
+      .section-title{font-size:26px}
+      .top-actions{width:100%;justify-content:flex-start}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-badge">AEC</div>
+        <div>
+          <h2 data-en="AEC Career & AI Guidance Hub" data-ta="AEC தொழில் & AI வழிகாட்டி மையம்">AEC Career & AI Guidance Hub</h2>
+          <p data-en="Career guidance website for +2 students and parents" data-ta="+2 மாணவர்கள் மற்றும் பெற்றோருக்கான தொழில் வழிகாட்டி இணையதளம்">Career guidance website for +2 students and parents</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <a class="pill-link" href="#contact" data-en="Contact" data-ta="தொடர்பு">Contact</a>
+        <div class="lang-switch">
+          <button class="lang-btn active" data-lang="en">English</button>
+          <button class="lang-btn" data-lang="ta">தமிழ்</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-wrap">
+        <div class="slides">
+          <div class="slide s1 active"></div>
+          <div class="slide s2"></div>
+          <div class="slide s3"></div>
+          <div class="slide s4"></div>
+        </div>
+        <div class="hero-content">
+          <div class="hero-text">
+            <div class="eyebrow" data-en="For +2 Students & Parents" data-ta="+2 மாணவர்கள் மற்றும் பெற்றோருக்காக">For +2 Students & Parents</div>
+            <h1 data-en="A career guidance website for +2 students and parents" data-ta="+2 மாணவர்கள் மற்றும் பெற்றோருக்கான தொழில் வழிகாட்டி இணையதளம்">A career guidance website for +2 students and parents</h1>
+            <p data-en="Explore engineering branches, syllabus overview, job scope, government opportunities, and step-by-step AI tool guidance in one place. Designed to make course selection simple, clear, and useful." data-ta="பொறியியல் பிரிவுகள், பாடத்திட்ட சுருக்கம், வேலை வாய்ப்பு, அரசு வேலை வாய்ப்புகள் மற்றும் படிப்படியாக AI கருவி வழிகாட்டுதலை ஒரே இடத்தில் அறியலாம். படிப்பு தேர்வை எளிமையாகவும் தெளிவாகவும் மாற்ற உருவாக்கப்பட்டது.">Explore engineering branches, syllabus overview, job scope, government opportunities, and step-by-step AI tool guidance in one place. Designed to make course selection simple, clear, and useful.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#mainTabs" data-en="Explore Tabs" data-ta="பகுதிகளை பார்க்க">Explore Tabs</a>
+              <a class="btn btn-ghost" href="#contact" data-en="Talk to Us" data-ta="எங்களை தொடர்பு கொள்ள">Talk to Us</a>
+            </div>
+          </div>
+          <div class="hero-side">
+            <div class="contact-card" id="contact">
+              <h3 data-en="Contact Information" data-ta="தொடர்பு விவரங்கள்">Contact Information</h3>
+              <div class="contact-list">
+                <div class="contact-item"><span>👤</span><div><strong>B. Nandhagopal</strong><br><span data-en="AP / Civil Engineering" data-ta="உதவி பேராசிரியர் / சிவில் பொறியியல்">AP / Civil Engineering</span></div></div>
+                <div class="contact-item"><span>📞</span><div><a href="tel:+918072813033">+91 80728 13033</a></div></div>
+                <div class="contact-item"><span>🏫</span><div data-en="Annapoorana Engineering College, Salem" data-ta="அன்னபூரணா பொறியியல் கல்லூரி, சேலம்">Annapoorana Engineering College, Salem</div></div>
+                <div class="contact-item"><span>💬</span><div data-en="Call or WhatsApp for career guidance and admission support" data-ta="தொழில் வழிகாட்டல் மற்றும் சேர்க்கை உதவிக்காக அழைக்கவும் அல்லது வாட்ஸ்அப் செய்யவும்">Call or WhatsApp for career guidance and admission support</div></div>
+              </div>
+            </div>
+            <div class="quick-card">
+              <h3 data-en="What You Can Find Here" data-ta="இங்கே என்ன கிடைக்கும்">What You Can Find Here</h3>
+              <div class="quick-badges">
+                <span data-en="9 Engineering Courses" data-ta="9 பொறியியல் படிப்புகள்">9 Engineering Courses</span>
+                <span data-en="AI Tools" data-ta="AI கருவிகள்">AI Tools</span>
+                <span data-en="Exam Support" data-ta="தேர்வு உதவி">Exam Support</span>
+                <span data-en="Govt Jobs" data-ta="அரசு வேலைகள்">Govt Jobs</span>
+                <span data-en="MNC Companies" data-ta="MNC நிறுவனங்கள்">MNC Companies</span>
+                <span data-en="Bilingual" data-ta="இருமொழி">Bilingual</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slider-dots">
+          <button class="dot active"></button>
+          <button class="dot"></button>
+          <button class="dot"></button>
+          <button class="dot"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-tabs" id="mainTabs">
+    <div class="container">
+      <div class="tab-panel">
+        <div class="tab-head">
+          <button class="tab-btn active" data-tab="overview" data-en="Overview" data-ta="முன்னோட்டம்">Overview</button>
+          <button class="tab-btn" data-tab="ai" data-en="AI Tools" data-ta="AI கருவிகள்">AI Tools</button>
+          <button class="tab-btn" data-tab="courses" data-en="Engineering Courses" data-ta="பொறியியல் படிப்புகள்">Engineering Courses</button>
+          <button class="tab-btn" data-tab="jobs" data-en="Jobs & Scope" data-ta="வேலை & வாய்ப்பு">Jobs & Scope</button>
+          <button class="tab-btn" data-tab="guidance" data-en="How to Use" data-ta="எப்படி பயன்படுத்துவது">How to Use</button>
+          <button class="tab-btn" data-tab="parents" data-en="For Parents" data-ta="பெற்றோருக்காக">For Parents</button>
+        </div>
+
+        <section class="tab-content active" id="overview">
+          <h2 class="section-title" data-en="Choose your future with clarity" data-ta="உங்கள் எதிர்காலத்தை தெளிவாக தேர்வு செய்யுங்கள்">Choose your future with clarity</h2>
+          <p class="section-sub" data-en="This website is designed to help +2 students and parents understand engineering branches, course nature, higher study scope, job opportunities and useful AI tools for exam preparation, revision and career planning." data-ta="இந்த இணையதளம் +2 மாணவர்களும் பெற்றோரும் பொறியியல் பிரிவுகள், படிப்பின் தன்மை, மேல்படிப்பு வாய்ப்பு, வேலை வாய்ப்புகள் மற்றும் தேர்வு தயாரிப்பு, மீள்பார்வு, தொழில் திட்டமிடலுக்கான பயனுள்ள AI கருவிகள் பற்றி புரிந்துகொள்ள உதவுவதற்காக வடிவமைக்கப்பட்டுள்ளது.">This website is designed to help +2 students and parents understand engineering branches, course nature, higher study scope, job opportunities and useful AI tools for exam preparation, revision and career planning.</p>
+          <div class="cards-grid">
+            <div class="card highlight">
+              <h3 data-en="Simple Course Understanding" data-ta="எளிய பாடநெறி புரிதல்">Simple Course Understanding</h3>
+              <p data-en="See each engineering course in simple language: what you study, what skills you gain and where you can work after graduation." data-ta="ஒவ்வொரு பொறியியல் படிப்பையும் எளிய மொழியில் பாருங்கள்: என்ன படிப்பீர்கள், என்ன திறன்கள் கிடைக்கும், பட்டம் முடித்த பின் எங்கு வேலை செய்யலாம் என்பதை அறியலாம்.">See each engineering course in simple language: what you study, what skills you gain and where you can work after graduation.</p>
+            </div>
+            <div class="card highlight">
+              <h3 data-en="AI Support for Exams" data-ta="தேர்வுகளுக்கு AI உதவி">AI Support for Exams</h3>
+              <p data-en="Get step-by-step guidance to use AI tools for summary notes, revision questions, mock interviews, simple explanations and timetable planning." data-ta="சுருக்க குறிப்புகள், மீள்பார்வை கேள்விகள், mock interview, எளிய விளக்கங்கள் மற்றும் நேர அட்டவணை திட்டமிடலுக்கு AI கருவிகளை எப்படி பயன்படுத்துவது என்பதை படிப்படியாக அறியலாம்.">Get step-by-step guidance to use AI tools for summary notes, revision questions, mock interviews, simple explanations and timetable planning.</p>
+            </div>
+            <div class="card highlight">
+              <h3 data-en="Useful for Students and Parents" data-ta="மாணவர்களுக்கும் பெற்றோருக்கும் பயன்">Useful for Students and Parents</h3>
+              <p data-en="Students can learn course details quickly and parents can compare job scope, core sector options and government exam pathways clearly." data-ta="மாணவர்கள் படிப்பு விவரங்களை விரைவாக அறியலாம்; பெற்றோர் வேலை வாய்ப்பு, core sector வாய்ப்பு மற்றும் அரசு தேர்வு பாதைகளை தெளிவாக ஒப்பிடலாம்.">Students can learn course details quickly and parents can compare job scope, core sector options and government exam pathways clearly.</p>
+            </div>
+          </div>
+          <div class="contact-strip">
+            <div>
+              <h3 data-en="Need direct guidance?" data-ta="நேரடி வழிகாட்டல் வேண்டுமா?">Need direct guidance?</h3>
+              <p data-en="Contact B. Nandhagopal for course clarification, admission guidance and branch selection support." data-ta="பாடநெறி தெளிவு, சேர்க்கை வழிகாட்டல் மற்றும் பிரிவு தேர்வு உதவிக்காக B. Nandhagopal-ஐ தொடர்பு கொள்ளுங்கள்.">Contact B. Nandhagopal for course clarification, admission guidance and branch selection support.</p>
+            </div>
+            <div class="contact-chip-wrap">
+              <a class="contact-chip" href="tel:+918072813033">📞 +91 80728 13033</a>
+              <a class="contact-chip" href="https://wa.me/918072813033" target="_blank" rel="noopener">💬 WhatsApp</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="tab-content" id="ai">
+          <h2 class="section-title" data-en="AI tools for study, revision and career guidance" data-ta="படிப்பு, மீள்பார்வு மற்றும் தொழில் வழிகாட்டலுக்கான AI கருவிகள்">AI tools for study, revision and career guidance</h2>
+          <p class="section-sub" data-en="Each tool below has a direct link, a simple use case, and step-by-step guidance for how +2 students can use it for the next exams and course planning." data-ta="கீழே உள்ள ஒவ்வொரு கருவிக்கும் நேரடி இணைப்பு, எளிய பயன்பாடு மற்றும் அடுத்த தேர்வுகளுக்கும் பாடநெறி திட்டமிடலுக்கும் +2 மாணவர்கள் அதை எப்படி பயன்படுத்தலாம் என்ற படிப்படியான விளக்கம் கொடுக்கப்பட்டுள்ளது.">Each tool below has a direct link, a simple use case, and step-by-step guidance for how +2 students can use it for the next exams and course planning.</p>
+          <div class="tool-grid">
+            <div class="card tool-card">
+              <div class="tool-logo">CG</div>
+              <div>
+                <div class="tool-head"><h3>ChatGPT</h3><a class="tool-link" href="https://openai.com/chatgpt/" target="_blank" rel="noopener">Open</a></div>
+                <div class="tool-points"><span data-en="Summary notes" data-ta="சுருக்க குறிப்புகள்">Summary notes</span><span data-en="Doubt clearing" data-ta="சந்தேக நீக்கம்">Doubt clearing</span><span data-en="Tamil + English" data-ta="தமிழ் + ஆங்கிலம்">Tamil + English</span></div>
+                <p class="muted" data-en="Best for simple explanation of difficult subjects, one-mark and two-mark revision, important questions, and timetable planning." data-ta="கடினமான பாடங்களை எளிமையாக விளக்க, ஒரு மார்க் / இரண்டு மார்க் மீள்பார்வு, முக்கிய கேள்விகள் மற்றும் நேர அட்டவணை திட்டமிடலுக்கு மிகவும் பயனுள்ளது.">Best for simple explanation of difficult subjects, one-mark and two-mark revision, important questions, and timetable planning.</p>
+                <details><summary data-en="How to use for next exams" data-ta="அடுத்த தேர்வுக்கு எப்படி பயன்படுத்துவது">How to use for next exams</summary><ol class="step-list"><li data-en="Type your subject and chapter name." data-ta="உங்கள் பாடம் மற்றும் அத்தியாய பெயரை எழுதுங்கள்.">Type your subject and chapter name.</li><li data-en="Ask for summary in simple Tamil or English." data-ta="எளிய தமிழ் அல்லது ஆங்கிலத்தில் சுருக்கம் கேளுங்கள்.">Ask for summary in simple Tamil or English.</li><li data-en="Ask for 5 one-mark, 5 two-mark and 3 long-answer questions." data-ta="5 ஒரு மார்க், 5 இரண்டு மார்க், 3 நீளமான பதில் கேள்விகள் கேளுங்கள்.">Ask for 5 one-mark, 5 two-mark and 3 long-answer questions.</li><li data-en="Ask it to test you with quiz mode." data-ta="Quiz முறையில் உங்களை சோதிக்க சொல்லுங்கள்.">Ask it to test you with quiz mode.</li></ol></details>
+              </div>
+            </div>
+
+            <div class="card tool-card">
+              <div class="tool-logo gemini">G</div>
+              <div>
+                <div class="tool-head"><h3>Google Gemini</h3><a class="tool-link" href="https://gemini.google.com/" target="_blank" rel="noopener">Open</a></div>
+                <div class="tool-points"><span data-en="Fast answer" data-ta="விரைவு பதில்">Fast answer</span><span data-en="Image understanding" data-ta="படம் புரிதல்">Image understanding</span><span data-en="Concept explanation" data-ta="கான்செப்ட் விளக்கம்">Concept explanation</span></div>
+                <p class="muted" data-en="Useful for concept explanation, comparing courses, understanding diagrams and getting quick preparation plans." data-ta="கான்செப்ட் விளக்கம், படிப்புகள் ஒப்பீடு, வரைபடம் புரிதல் மற்றும் விரைவு தயாரிப்பு திட்டங்களுக்கு பயனுள்ளது.">Useful for concept explanation, comparing courses, understanding diagrams and getting quick preparation plans.</p>
+                <details><summary data-en="How to use for next exams" data-ta="அடுத்த தேர்வுக்கு எப்படி பயன்படுத்துவது">How to use for next exams</summary><ol class="step-list"><li data-en="Ask: Explain this topic for +2 student level." data-ta="இந்த தலைப்பை +2 மாணவர் நிலைக்கு ஏற்றவாறு விளக்கு என்று கேளுங்கள்.">Ask: Explain this topic for +2 student level.</li><li data-en="Upload a diagram or textbook image if needed." data-ta="தேவைப்பட்டால் வரைபடம் அல்லது புத்தக படத்தை பதிவேற்றுங்கள்.">Upload a diagram or textbook image if needed.</li><li data-en="Ask for short memory tricks and mnemonics." data-ta="சுருக்க நினைவுத்தந்திரங்கள் கேளுங்கள்.">Ask for short memory tricks and mnemonics.</li><li data-en="Ask for daily revision plan until exam date." data-ta="தேர்வு தேதிவரை தினசரி மீள்பார்வு திட்டம் கேளுங்கள்.">Ask for daily revision plan until exam date.</li></ol></details>
+              </div>
+            </div>
+
+            <div class="card tool-card">
+              <div class="tool-logo copilot">CP</div>
+              <div>
+                <div class="tool-head"><h3>Microsoft Copilot</h3><a class="tool-link" href="https://copilot.microsoft.com/" target="_blank" rel="noopener">Open</a></div>
+                <div class="tool-points"><span data-en="Quick research" data-ta="விரைவு தேடல்">Quick research</span><span data-en="Comparison" data-ta="ஒப்பீடு">Comparison</span><span data-en="Study plan" data-ta="படிப்பு திட்டம்">Study plan</span></div>
+                <p class="muted" data-en="Useful for comparing engineering branches, making study tables and understanding real-world uses of subjects." data-ta="பொறியியல் பிரிவுகளை ஒப்பிட, படிப்பு அட்டவணை உருவாக்க, பாடங்களின் நடைமுறை பயன்பாடுகளை புரிய உதவும்.">Useful for comparing engineering branches, making study tables and understanding real-world uses of subjects.</p>
+                <details><summary data-en="How to use for next exams" data-ta="அடுத்த தேர்வுக்கு எப்படி பயன்படுத்துவது">How to use for next exams</summary><ol class="step-list"><li data-en="Ask for chapter-wise revision checklist." data-ta="அத்தியாய வாரியான revision checklist கேளுங்கள்.">Ask for chapter-wise revision checklist.</li><li data-en="Ask to compare similar concepts in table form." data-ta="ஒத்த கான்செப்ட்களை அட்டவணை வடிவில் ஒப்பிட சொல்லுங்கள்.">Ask to compare similar concepts in table form.</li><li data-en="Ask for exam-day last minute revision points." data-ta="தேர்வு நாளுக்கான இறுதி முக்கிய குறிப்புகள் கேளுங்கள்.">Ask for exam-day last minute revision points.</li></ol></details>
+              </div>
+            </div>
+
+            <div class="card tool-card">
+              <div class="tool-logo perplexity">PX</div>
+              <div>
+                <div class="tool-head"><h3>Perplexity</h3><a class="tool-link" href="https://www.perplexity.ai/" target="_blank" rel="noopener">Open</a></div>
+                <div class="tool-points"><span data-en="Source-based answers" data-ta="ஆதாரத்துடன் பதில்">Source-based answers</span><span data-en="Course research" data-ta="பாடநெறி ஆய்வு">Course research</span><span data-en="Latest info" data-ta="புதிய தகவல்">Latest info</span></div>
+                <p class="muted" data-en="Best for finding source-backed information about colleges, branch demand, entrance exams, scholarships and company trends." data-ta="கல்லூரிகள், பிரிவு தேவை, நுழைவுத் தேர்வுகள், scholarship மற்றும் நிறுவன போக்குகள் பற்றிய ஆதாரத்துடன் தகவல் பெற உதவும்.">Best for finding source-backed information about colleges, branch demand, entrance exams, scholarships and company trends.</p>
+                <details><summary data-en="How to use for career planning" data-ta="தொழில் திட்டமிடலுக்கு எப்படி பயன்படுத்துவது">How to use for career planning</summary><ol class="step-list"><li data-en="Ask: Compare Civil, IT and Biomedical Engineering in India." data-ta="Civil, IT, Biomedical Engineering ஐ இந்தியாவில் ஒப்பிடு என்று கேளுங்கள்.">Ask: Compare Civil, IT and Biomedical Engineering in India.</li><li data-en="Ask for current job sectors and higher studies." data-ta="தற்போதைய வேலை துறைகள் மற்றும் மேல்படிப்புகள் கேளுங்கள்.">Ask for current job sectors and higher studies.</li><li data-en="Read cited sources before deciding." data-ta="தீர்மானிக்க முன் கொடுக்கப்பட்ட ஆதாரங்களை வாசிக்கவும்.">Read cited sources before deciding.</li></ol></details>
+              </div>
+            </div>
+
+            <div class="card tool-card">
+              <div class="tool-logo notebook">NL</div>
+              <div>
+                <div class="tool-head"><h3>NotebookLM</h3><a class="tool-link" href="https://notebooklm.google.com/" target="_blank" rel="noopener">Open</a></div>
+                <div class="tool-points"><span data-en="Notes from sources" data-ta="ஆவணத்திலிருந்து குறிப்புகள்">Notes from sources</span><span data-en="Flashcards" data-ta="Flashcards">Flashcards</span><span data-en="Quiz" data-ta="Quiz">Quiz</span></div>
+                <p class="muted" data-en="Useful when you upload your own notes, PDFs or copied textbook passages and want summaries, flashcards and likely questions." data-ta="உங்கள் சொந்த குறிப்புகள், PDF அல்லது புத்தக பகுதியை பதிவேற்றி சுருக்கம், flashcards மற்றும் சாத்தியமான கேள்விகளை பெற மிகவும் உதவும்.">Useful when you upload your own notes, PDFs or copied textbook passages and want summaries, flashcards and likely questions.</p>
+                <details><summary data-en="How to use for next exams" data-ta="அடுத்த தேர்வுக்கு எப்படி பயன்படுத்துவது">How to use for next exams</summary><ol class="step-list"><li data-en="Create one notebook per subject." data-ta="ஒவ்வொரு பாடத்திற்கும் ஒரு notebook உருவாக்குங்கள்.">Create one notebook per subject.</li><li data-en="Upload notes, PDFs or paste textbook content." data-ta="குறிப்புகள், PDF அல்லது புத்தக உள்ளடக்கத்தை paste செய்யுங்கள்.">Upload notes, PDFs or paste textbook content.</li><li data-en="Ask for summary, formula sheet and quiz questions." data-ta="சுருக்கம், formula sheet, quiz கேள்விகள் கேளுங்கள்.">Ask for summary, formula sheet and quiz questions.</li><li data-en="Revise only from your uploaded content." data-ta="நீங்கள் பதிவேற்றிய உள்ளடக்கத்திலிருந்தே revision செய்யுங்கள்.">Revise only from your uploaded content.</li></ol></details>
+              </div>
+            </div>
+
+            <div class="card tool-card">
+              <div class="tool-logo canva">CV</div>
+              <div>
+                <div class="tool-head"><h3>Canva AI</h3><a class="tool-link" href="https://www.canva.com/ai-assistant/" target="_blank" rel="noopener">Open</a></div>
+                <div class="tool-points"><span data-en="Presentation" data-ta="Presentation">Presentation</span><span data-en="Poster" data-ta="Poster">Poster</span><span data-en="Resume" data-ta="Resume">Resume</span></div>
+                <p class="muted" data-en="Useful for creating seminar PPTs, project posters, simple resumes and visual revision charts." data-ta="Seminar PPT, project poster, எளிய resume மற்றும் பார்வைக்கு எளிதான revision charts உருவாக்க பயன்படும்.">Useful for creating seminar PPTs, project posters, simple resumes and visual revision charts.</p>
+                <details><summary data-en="How students can use it" data-ta="மாணவர்கள் எப்படி பயன்படுத்தலாம்">How students can use it</summary><ol class="step-list"><li data-en="Type your topic and create a presentation draft." data-ta="உங்கள் தலைப்பை கொடுத்து presentation draft உருவாக்குங்கள்.">Type your topic and create a presentation draft.</li><li data-en="Convert chapter summary into infographic." data-ta="அத்தியாய சுருக்கத்தை infographic ஆக மாற்றுங்கள்.">Convert chapter summary into infographic.</li><li data-en="Make one-page revision posters for formulas and key terms." data-ta="Formula மற்றும் முக்கிய சொற்களுக்கு one-page revision poster உருவாக்குங்கள்.">Make one-page revision posters for formulas and key terms.</li></ol></details>
+              </div>
+            </div>
+
+            <div class="card tool-card">
+              <div class="tool-logo grammarly">GR</div>
+              <div>
+                <div class="tool-head"><h3>Grammarly</h3><a class="tool-link" href="https://www.grammarly.com/" target="_blank" rel="noopener">Open</a></div>
+                <div class="tool-points"><span data-en="Writing help" data-ta="எழுத்து உதவி">Writing help</span><span data-en="Grammar" data-ta="இலக்கணம்">Grammar</span><span data-en="Rewrite" data-ta="மீண்டும் எழுதுதல்">Rewrite</span></div>
+                <p class="muted" data-en="Helpful for improving English answers, SOPs, emails, resumes and project reports." data-ta="ஆங்கிலப் பதில்கள், SOP, email, resume மற்றும் project report-ஐ மேம்படுத்த உதவும்.">Helpful for improving English answers, SOPs, emails, resumes and project reports.</p>
+                <details><summary data-en="How to use step by step" data-ta="படிப்படியாக எப்படி பயன்படுத்துவது">How to use step by step</summary><ol class="step-list"><li data-en="Write your paragraph in simple English." data-ta="உங்கள் பத்தியை எளிய ஆங்கிலத்தில் எழுதுங்கள்.">Write your paragraph in simple English.</li><li data-en="Paste it in Grammarly." data-ta="அதை Grammarly-யில் paste செய்யுங்கள்.">Paste it in Grammarly.</li><li data-en="Correct grammar and improve clarity." data-ta="Grammar திருத்தி clarity மேம்படுத்துங்கள்.">Correct grammar and improve clarity.</li><li data-en="Use before submitting English assignments." data-ta="ஆங்கில assignment சமர்ப்பிக்க முன் பயன்படுத்துங்கள்.">Use before submitting English assignments.</li></ol></details>
+              </div>
+            </div>
+
+            <div class="card tool-card">
+              <div class="tool-logo khan">KM</div>
+              <div>
+                <div class="tool-head"><h3>Khanmigo</h3><a class="tool-link" href="https://www.khanacademy.org/khanmigo" target="_blank" rel="noopener">Open</a></div>
+                <div class="tool-points"><span data-en="Tutoring" data-ta="Tutor உதவி">Tutoring</span><span data-en="Practice" data-ta="பயிற்சி">Practice</span><span data-en="Question guidance" data-ta="கேள்வி வழிகாட்டல்">Question guidance</span></div>
+                <p class="muted" data-en="An AI tutor from Khan Academy that guides students instead of just giving answers directly." data-ta="Khan Academy-யின் AI tutor; நேரடி பதில் கொடுப்பதற்குப் பதிலாக மாணவரை வழிநடத்தும் கருவி.">An AI tutor from Khan Academy that guides students instead of just giving answers directly.</p>
+                <details><summary data-en="Best use for exam preparation" data-ta="தேர்வு தயாரிப்பில் சிறந்த பயன்பாடு">Best use for exam preparation</summary><ol class="step-list"><li data-en="Use it to practice one concept at a time." data-ta="ஒரே ஒரு கான்செப்டை ஒரே நேரத்தில் பயிற்சி செய்யுங்கள்.">Use it to practice one concept at a time.</li><li data-en="Ask it to guide you without revealing answer first." data-ta="பதில் சொல்லாமல் வழிகாட்டு என்று கேளுங்கள்.">Ask it to guide you without revealing answer first.</li><li data-en="Use it for self-testing after revision." data-ta="Revision முடிந்த பின் self-test-க்கு பயன்படுத்துங்கள்.">Use it for self-testing after revision.</li></ol></details>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="tab-content" id="courses">
+          <h2 class="section-title" data-en="Engineering courses explained simply" data-ta="பொறியியல் படிப்புகள் எளிமையாக விளக்கம்">Engineering courses explained simply</h2>
+          <p class="section-sub" data-en="Click each branch to see syllabus overview, key subjects, scope, jobs, companies and government opportunities. Nine branches are included here." data-ta="ஒவ்வொரு பிரிவையும் கிளிக் செய்து பாடத்திட்ட சுருக்கம், முக்கிய பாடங்கள், வாய்ப்பு, வேலை, நிறுவனங்கள் மற்றும் அரசு வேலை வாய்ப்புகளைப் பாருங்கள். இங்கு ஒன்பது பிரிவுகள் சேர்க்கப்பட்டுள்ளன.">Click each branch to see syllabus overview, key subjects, scope, jobs, companies and government opportunities. Nine branches are included here.</p>
+          <div class="course-grid">
+            <div class="course-tabs">
+              <button class="course-btn active" data-course="civil">Civil Engineering</button>
+              <button class="course-btn" data-course="mechanical">Mechanical Engineering</button>
+              <button class="course-btn" data-course="eee">EEE</button>
+              <button class="course-btn" data-course="ece">ECE</button>
+              <button class="course-btn" data-course="cse">CSE</button>
+              <button class="course-btn" data-course="it">IT</button>
+              <button class="course-btn" data-course="aids">AI & Data Science</button>
+              <button class="course-btn" data-course="automobile">Automobile Engineering</button>
+              <button class="course-btn" data-course="biomedical">Biomedical Engineering</button>
+            </div>
+            <div>
+              <article class="course-content active" id="civil">
+                <div class="card">
+                  <div class="course-header"><h3>Civil Engineering</h3><span class="course-badge" data-en="Builds infrastructure" data-ta="அடிப்படை கட்டமைப்பு உருவாக்கும் துறை">Builds infrastructure</span></div>
+                  <div class="topic-grid">
+                    <div class="topic"><h5 data-en="Syllabus Overview" data-ta="பாடத்திட்ட சுருக்கம்">Syllabus Overview</h5><ul><li>Engineering mechanics</li><li>Surveying</li><li>Building materials</li><li>Structural analysis</li><li>Concrete technology</li><li>Transportation, water resources, environmental engineering</li></ul></div>
+                    <div class="topic"><h5 data-en="Scope" data-ta="வாய்ப்பு">Scope</h5><ul><li>Construction and infrastructure</li><li>Highways, bridges, smart cities</li><li>Water supply and wastewater</li><li>Consultancy and site management</li></ul></div>
+                    <div class="topic"><h5 data-en="Job Opportunities" data-ta="வேலை வாய்ப்புகள்">Job Opportunities</h5><ul><li>Site engineer</li><li>Design engineer</li><li>Quantity surveyor</li><li>Project coordinator</li><li>Environmental engineer</li></ul></div>
+                    <div class="topic"><h5 data-en="Major Companies & Govt Jobs" data-ta="முக்கிய நிறுவனங்கள் & அரசு வேலைகள்">Major Companies & Govt Jobs</h5><ul><li>L&T, Tata Projects, Afcons, Shapoorji Pallonji, AECOM</li><li>State PWD, Highways, TWAD, Metro Rail</li><li>UPSC ESE, SSC JE, RRB JE, TNPSC technical posts</li></ul></div>
+                  </div>
+                </div>
+              </article>
+              <article class="course-content" id="mechanical"><div class="card"><div class="course-header"><h3>Mechanical Engineering</h3><span class="course-badge">Machines & manufacturing</span></div><div class="topic-grid"><div class="topic"><h5>Syllabus Overview</h5><ul><li>Engineering drawing</li><li>Thermodynamics</li><li>Fluid mechanics</li><li>Manufacturing technology</li><li>Machine design</li><li>CAD/CAM</li></ul></div><div class="topic"><h5>Scope</h5><ul><li>Manufacturing plants</li><li>Energy and thermal sector</li><li>Automotive sector</li><li>Maintenance and product design</li></ul></div><div class="topic"><h5>Job Opportunities</h5><ul><li>Production engineer</li><li>Design engineer</li><li>Maintenance engineer</li><li>Quality engineer</li></ul></div><div class="topic"><h5>Major Companies & Govt Jobs</h5><ul><li>Ashok Leyland, TVS, Hyundai, Caterpillar, Bosch</li><li>Railways, BHEL, ONGC, ISRO, DRDO</li><li>UPSC ESE, SSC JE, PSU recruitment</li></ul></div></div></div></article>
+              <article class="course-content" id="eee"><div class="card"><div class="course-header"><h3>Electrical and Electronics Engineering</h3><span class="course-badge">Power & control systems</span></div><div class="topic-grid"><div class="topic"><h5>Syllabus Overview</h5><ul><li>Circuit theory</li><li>Electrical machines</li><li>Power systems</li><li>Control systems</li><li>Power electronics</li><li>Renewable energy basics</li></ul></div><div class="topic"><h5>Scope</h5><ul><li>Power generation and distribution</li><li>Industrial automation</li><li>Renewable energy</li><li>Electrical maintenance</li></ul></div><div class="topic"><h5>Job Opportunities</h5><ul><li>Electrical engineer</li><li>Maintenance engineer</li><li>Testing engineer</li><li>Control panel engineer</li></ul></div><div class="topic"><h5>Major Companies & Govt Jobs</h5><ul><li>Siemens, Schneider Electric, ABB, Eaton, Havells</li><li>TNEB/TANGEDCO, BHEL, Railways, NTPC</li><li>UPSC ESE, SSC JE, PSU jobs</li></ul></div></div></div></article>
+              <article class="course-content" id="ece"><div class="card"><div class="course-header"><h3>Electronics and Communication Engineering</h3><span class="course-badge">Communication & embedded systems</span></div><div class="topic-grid"><div class="topic"><h5>Syllabus Overview</h5><ul><li>Electronic devices</li><li>Signals and systems</li><li>Digital electronics</li><li>Communication systems</li><li>Microprocessors</li><li>Embedded systems</li></ul></div><div class="topic"><h5>Scope</h5><ul><li>Telecom</li><li>Embedded products</li><li>Semiconductor support roles</li><li>Automation and electronics testing</li></ul></div><div class="topic"><h5>Job Opportunities</h5><ul><li>Embedded engineer</li><li>Network engineer</li><li>Service engineer</li><li>VLSI support roles</li></ul></div><div class="topic"><h5>Major Companies & Govt Jobs</h5><ul><li>Nokia, Qualcomm, Samsung, Bosch, Honeywell</li><li>BSNL, ISRO, DRDO, BEL, Railways</li><li>UPSC ESE, SSC JE, PSU recruitment</li></ul></div></div></div></article>
+              <article class="course-content" id="cse"><div class="card"><div class="course-header"><h3>Computer Science and Engineering</h3><span class="course-badge">Software & computing</span></div><div class="topic-grid"><div class="topic"><h5>Syllabus Overview</h5><ul><li>Programming in C/Python/Java</li><li>Data structures</li><li>Database management</li><li>Operating systems</li><li>Computer networks</li><li>Software engineering</li></ul></div><div class="topic"><h5>Scope</h5><ul><li>Software development</li><li>Testing</li><li>Cloud and DevOps</li><li>App and web development</li></ul></div><div class="topic"><h5>Job Opportunities</h5><ul><li>Software developer</li><li>Full-stack developer</li><li>QA engineer</li><li>System engineer</li></ul></div><div class="topic"><h5>Major Companies & Govt Jobs</h5><ul><li>TCS, Infosys, Wipro, Accenture, Cognizant, HCL</li><li>NIC, CDAC, banking IT roles, RailTel</li><li>UPSC, SSC, bank tech roles, PSU IT posts</li></ul></div></div></div></article>
+              <article class="course-content" id="it"><div class="card"><div class="course-header"><h3>Information Technology</h3><span class="course-badge">Systems, software & data</span></div><div class="topic-grid"><div class="topic"><h5>Syllabus Overview</h5><ul><li>Programming</li><li>Web technologies</li><li>Databases</li><li>Network security</li><li>Cloud basics</li><li>Software project work</li></ul></div><div class="topic"><h5>Scope</h5><ul><li>IT services</li><li>Cybersecurity support</li><li>Web and app development</li><li>System administration</li></ul></div><div class="topic"><h5>Job Opportunities</h5><ul><li>IT analyst</li><li>Web developer</li><li>Support engineer</li><li>Cloud associate</li></ul></div><div class="topic"><h5>Major Companies & Govt Jobs</h5><ul><li>Infosys, Zoho, TCS, HCL, Tech Mahindra</li><li>E-governance, digital service posts, bank IT cells</li><li>Government software and technical support exams</li></ul></div></div></div></article>
+              <article class="course-content" id="aids"><div class="card"><div class="course-header"><h3>Artificial Intelligence and Data Science</h3><span class="course-badge">AI, analytics & automation</span></div><div class="topic-grid"><div class="topic"><h5>Syllabus Overview</h5><ul><li>Python and statistics</li><li>Machine learning basics</li><li>Data analytics</li><li>Artificial intelligence concepts</li><li>Deep learning basics</li><li>Data visualization</li></ul></div><div class="topic"><h5>Scope</h5><ul><li>AI applications</li><li>Data analytics</li><li>Business intelligence</li><li>Automation support</li></ul></div><div class="topic"><h5>Job Opportunities</h5><ul><li>Data analyst</li><li>AI associate</li><li>ML support engineer</li><li>Business analyst</li></ul></div><div class="topic"><h5>Major Companies & Govt Jobs</h5><ul><li>Google, Microsoft, Amazon, IBM, Accenture, TCS</li><li>Digital governance, analytics teams, research support</li><li>Data-related government recruitment and PSU digital roles</li></ul></div></div></div></article>
+              <article class="course-content" id="automobile"><div class="card"><div class="course-header"><h3>Automobile Engineering</h3><span class="course-badge">Vehicles & mobility systems</span></div><div class="topic-grid"><div class="topic"><h5>Syllabus Overview</h5><ul><li>Vehicle dynamics</li><li>Automotive engines</li><li>Chassis and transmission</li><li>Automotive electronics</li><li>Maintenance and diagnostics</li><li>EV technology basics</li></ul></div><div class="topic"><h5>Scope</h5><ul><li>Automobile manufacturing</li><li>EV sector</li><li>Service and diagnostics</li><li>Testing and quality</li></ul></div><div class="topic"><h5>Job Opportunities</h5><ul><li>Automobile engineer</li><li>Service engineer</li><li>Quality engineer</li><li>EV support engineer</li></ul></div><div class="topic"><h5>Major Companies & Govt Jobs</h5><ul><li>Hyundai, Tata Motors, Mahindra, TVS, Ashok Leyland</li><li>State transport workshops, defense vehicle units, rail coach factories</li><li>SSC JE, PSU mechanical/auto-related posts</li></ul></div></div></div></article>
+              <article class="course-content" id="biomedical"><div class="card"><div class="course-header"><h3>Biomedical Engineering</h3><span class="course-badge">Healthcare technology</span></div><div class="topic-grid"><div class="topic"><h5>Syllabus Overview</h5><ul><li>Human anatomy basics</li><li>Medical electronics</li><li>Biomedical instrumentation</li><li>Biomaterials</li><li>Signal processing</li><li>Hospital equipment management</li></ul></div><div class="topic"><h5>Scope</h5><ul><li>Medical device industry</li><li>Hospitals and diagnostics</li><li>Healthcare equipment service</li><li>Research and product support</li></ul></div><div class="topic"><h5>Job Opportunities</h5><ul><li>Biomedical engineer</li><li>Clinical engineer</li><li>Service engineer</li><li>Medical equipment specialist</li></ul></div><div class="topic"><h5>Major Companies & Govt Jobs</h5><ul><li>GE HealthCare, Philips, Siemens Healthineers, Medtronic</li><li>Government hospitals, biomedical maintenance units, research institutes</li><li>Health department technical posts and medical equipment support jobs</li></ul></div></div></div></article>
+            </div>
+          </div>
+        </section>
+
+        <section class="tab-content" id="jobs">
+          <h2 class="section-title" data-en="Jobs, higher studies and future scope" data-ta="வேலை, மேல்படிப்பு மற்றும் எதிர்கால வாய்ப்பு">Jobs, higher studies and future scope</h2>
+          <p class="section-sub" data-en="Students should not choose a branch only by trend. They should compare interest, skill, course nature, job sector and future exam preparation comfort." data-ta="மாணவர்கள் ஒரு பிரிவை வெறும் trend அடிப்படையில் தேர்வு செய்யக்கூடாது. ஆர்வம், திறன், பாடநெறி தன்மை, வேலை துறை மற்றும் எதிர்கால தேர்வு தயாரிப்பின் வசதியை ஒப்பிட்டு தேர்வு செய்ய வேண்டும்.">Students should not choose a branch only by trend. They should compare interest, skill, course nature, job sector and future exam preparation comfort.</p>
+          <div class="cards-grid">
+            <div class="card"><h3 data-en="Private Sector" data-ta="தனியார் துறை">Private Sector</h3><ul class="mini-list"><li data-en="IT services and software companies" data-ta="IT சேவைகள் மற்றும் software நிறுவனங்கள்">IT services and software companies</li><li data-en="Core engineering industries" data-ta="Core engineering துறைகள்">Core engineering industries</li><li data-en="Manufacturing and production sector" data-ta="உற்பத்தி துறை">Manufacturing and production sector</li><li data-en="Consultancy, design and project firms" data-ta="Consultancy, design மற்றும் project நிறுவனங்கள்">Consultancy, design and project firms</li></ul></div>
+            <div class="card"><h3 data-en="Government Sector" data-ta="அரசு துறை">Government Sector</h3><ul class="mini-list"><li>UPSC Engineering Services</li><li>SSC JE / RRB JE</li><li data-en="State department technical posts" data-ta="மாநில அரசு தொழில்நுட்ப பணியிடங்கள்">State department technical posts</li><li data-en="PSU recruitment" data-ta="PSU ஆட்சேர்ப்பு">PSU recruitment</li></ul></div>
+            <div class="card"><h3 data-en="Higher Studies" data-ta="மேல்படிப்பு">Higher Studies</h3><ul class="mini-list"><li>M.E. / M.Tech.</li><li>MBA</li><li>Data / AI certifications</li><li data-en="Research and specialization" data-ta="ஆராய்ச்சி மற்றும் சிறப்பு படிப்பு">Research and specialization</li></ul></div>
+          </div>
+          <div class="stats-grid" style="margin-top:18px">
+            <div class="card"><h3 data-en="Best for software jobs" data-ta="Software வேலைக்கு சிறந்தது">Best for software jobs</h3><p>CSE / IT / AI & DS</p></div>
+            <div class="card"><h3 data-en="Best for core site work" data-ta="Core site வேலைக்கு சிறந்தது">Best for core site work</h3><p>Civil / Mechanical / Automobile</p></div>
+            <div class="card"><h3 data-en="Best for government technical exams" data-ta="அரசு தொழில்நுட்பத் தேர்வுக்கு சிறந்தது">Best for government technical exams</h3><p>Civil / EEE / Mechanical / ECE</p></div>
+            <div class="card"><h3 data-en="Best for hospital-tech field" data-ta="மருத்துவ தொழில்நுட்பத் துறைக்கு சிறந்தது">Best for hospital-tech field</h3><p>Biomedical Engineering</p></div>
+          </div>
+        </section>
+
+        <section class="tab-content" id="guidance">
+          <h2 class="section-title" data-en="How students can use this website" data-ta="இந்த இணையதளத்தை மாணவர்கள் எப்படி பயன்படுத்தலாம்">How students can use this website</h2>
+          <p class="section-sub" data-en="Use this simple 3-step method to move from confusion to clarity." data-ta="குழப்பத்திலிருந்து தெளிவுக்கு செல்ல இந்த எளிய 3-step முறையை பயன்படுத்துங்கள்.">Use this simple 3-step method to move from confusion to clarity.</p>
+          <div class="steps-grid">
+            <div class="card"><h3 data-en="Step 1: Know Yourself" data-ta="படி 1: உங்களை அறியுங்கள்">Step 1: Know Yourself</h3><p data-en="Ask what subjects you like most, whether you enjoy coding, drawing, machines, buildings, electronics, biology or problem solving." data-ta="உங்களுக்கு எந்த பாடங்கள் பிடிக்கும், coding, drawing, machines, buildings, electronics, biology அல்லது problem solving பிடிக்கிறதா என்று யோசிக்கவும்.">Ask what subjects you like most, whether you enjoy coding, drawing, machines, buildings, electronics, biology or problem solving.</p></div>
+            <div class="card"><h3 data-en="Step 2: Compare Courses" data-ta="படி 2: படிப்புகளை ஒப்பிடுங்கள்">Step 2: Compare Courses</h3><p data-en="Open the Engineering Courses tab and compare syllabus overview, jobs, companies and government opportunities." data-ta="Engineering Courses tab-ஐ திறந்து பாடத்திட்டம், வேலை, நிறுவனங்கள் மற்றும் அரசு வாய்ப்புகளை ஒப்பிடுங்கள்.">Open the Engineering Courses tab and compare syllabus overview, jobs, companies and government opportunities.</p></div>
+            <div class="card"><h3 data-en="Step 3: Use AI Tools Smartly" data-ta="படி 3: AI கருவிகளை புத்திசாலித்தனமாக பயன்படுத்துங்கள்">Step 3: Use AI Tools Smartly</h3><p data-en="Go to the AI Tools tab and use the step-by-step prompts to revise chapters, improve understanding and plan your next exams." data-ta="AI Tools tab-க்கு சென்று படிப்படியான prompts-ஐ பயன்படுத்தி அத்தியாயங்களை மீள்பார்த்து, புரிதலை மேம்படுத்தி அடுத்த தேர்வுகளைத் திட்டமிடுங்கள்.">Go to the AI Tools tab and use the step-by-step prompts to revise chapters, improve understanding and plan your next exams.</p></div>
+          </div>
+          <div class="info-grid" style="margin-top:18px">
+            <div class="card"><h3 data-en="Do" data-ta="செய்யவேண்டியது">Do</h3><ul class="mini-list"><li data-en="Use AI for explanation and practice" data-ta="விளக்கம் மற்றும் பயிற்சிக்கு AI பயன்படுத்துங்கள்">Use AI for explanation and practice</li><li data-en="Cross-check important facts with teachers/books" data-ta="முக்கிய தகவல்களை ஆசிரியர்/புத்தகத்துடன் சரிபார்க்கவும்">Cross-check important facts with teachers/books</li><li data-en="Use your own notes for revision" data-ta="Revision-க்கு உங்கள் சொந்த குறிப்புகளை பயன்படுத்துங்கள்">Use your own notes for revision</li></ul></div>
+            <div class="card"><h3 data-en="Avoid" data-ta="தவிர்க்கவேண்டியது">Avoid</h3><ul class="mini-list"><li data-en="Do not copy answers blindly" data-ta="பதில்களை கண்மூடித்தனமாக நகலெடுக்க வேண்டாம்">Do not copy answers blindly</li><li data-en="Do not trust every output without checking" data-ta="சரிபார்க்காமல் ஒவ்வொரு output-யையும் நம்ப வேண்டாம்">Do not trust every output without checking</li><li data-en="Do not choose a course only because friends choose it" data-ta="நண்பர்கள் தேர்வு செய்ததால் மட்டும் படிப்பை தேர்வு செய்ய வேண்டாம்">Do not choose a course only because friends choose it</li></ul></div>
+          </div>
+        </section>
+
+        <section class="tab-content" id="parents">
+          <h2 class="section-title" data-en="Guidance for parents" data-ta="பெற்றோருக்கான வழிகாட்டல்">Guidance for parents</h2>
+          <p class="section-sub" data-en="Parents play a major role in course selection. The best decision is taken when student interest, affordability, travel, college quality and job scope are considered together." data-ta="பாடநெறி தேர்வில் பெற்றோரின் பங்கு முக்கியம். மாணவர் ஆர்வம், செலவு, பயணம், கல்லூரி தரம் மற்றும் வேலை வாய்ப்பு ஆகியவை சேர்த்து பார்க்கும் போது தான் நல்ல முடிவு கிடைக்கும்.">Parents play a major role in course selection. The best decision is taken when student interest, affordability, travel, college quality and job scope are considered together.</p>
+          <div class="cards-grid">
+            <div class="card"><h3 data-en="Check Interest" data-ta="ஆர்வத்தை கவனியுங்கள்">Check Interest</h3><p data-en="A student who likes computers may do better in CSE/IT/AI. A student who likes buildings and field work may fit Civil." data-ta="கணினி பிடிக்கும் மாணவர் CSE/IT/AI-ல் சிறப்பாக செய்யலாம். கட்டிடங்கள் மற்றும் வெளிப்பணிகள் பிடிக்கும் மாணவருக்கு Civil பொருத்தமாக இருக்கலாம்.">A student who likes computers may do better in CSE/IT/AI. A student who likes buildings and field work may fit Civil.</p></div>
+            <div class="card"><h3 data-en="Check College Quality" data-ta="கல்லூரி தரத்தை பார்க்கவும்">Check College Quality</h3><p data-en="See faculty, labs, placement support, training, discipline and learning environment before deciding." data-ta="முடிவு செய்யும் முன் ஆசிரியர்கள், ஆய்வகங்கள், placement support, training, ஒழுக்கம் மற்றும் கற்றல் சூழல் ஆகியவற்றைப் பாருங்கள்.">See faculty, labs, placement support, training, discipline and learning environment before deciding.</p></div>
+            <div class="card"><h3 data-en="Check Long-Term Value" data-ta="நீண்டகால பயனை பார்க்கவும்">Check Long-Term Value</h3><p data-en="Focus on whether the course gives durable skills and allows both private and government job options." data-ta="தனியார் மற்றும் அரசு வேலை வாய்ப்புகளுக்கும் உதவும் நிலையான திறன்களை அந்தப் பாடநெறி தருகிறதா என்பதை கவனியுங்கள்.">Focus on whether the course gives durable skills and allows both private and government job options.</p></div>
+          </div>
+          <div class="contact-strip">
+            <div>
+              <h3 data-en="Need a course discussion with parent and student together?" data-ta="மாணவரும் பெற்றோரும் சேர்ந்து பாடநெறி ஆலோசனை வேண்டுமா?">Need a course discussion with parent and student together?</h3>
+              <p data-en="Call B. Nandhagopal for one-to-one guidance." data-ta="ஒருவருக்கு ஒருவர் வழிகாட்டலுக்காக B. Nandhagopal-ஐ அழைக்கவும்.">Call B. Nandhagopal for one-to-one guidance.</p>
+            </div>
+            <div class="contact-chip-wrap">
+              <a class="contact-chip" href="tel:+918072813033">📞 Call Now</a>
+              <a class="contact-chip" href="https://wa.me/918072813033" target="_blank" rel="noopener">💬 WhatsApp Now</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-box">
+        <div class="footer-grid">
+          <div>
+            <h3 data-en="Important Note" data-ta="முக்கிய குறிப்பு">Important Note</h3>
+            <p data-en="AI tools are helpful for understanding and revision, but students should always verify important academic content with teachers, textbooks and official syllabus references before final use." data-ta="AI கருவிகள் புரிதல் மற்றும் revision-க்கு உதவுகின்றன. ஆனால் முக்கியமான கல்வி உள்ளடக்கங்களை இறுதி பயன்பாட்டிற்கு முன் ஆசிரியர்கள், பாடப்புத்தகங்கள் மற்றும் அதிகாரப்பூர்வ பாடத்திட்ட குறிப்புகளுடன் சரிபார்க்க வேண்டும்.">AI tools are helpful for understanding and revision, but students should always verify important academic content with teachers, textbooks and official syllabus references before final use.</p>
+          </div>
+          <div>
+            <h3 data-en="Contact" data-ta="தொடர்பு">Contact</h3>
+            <p><strong>B. Nandhagopal</strong><br><span data-en="AP / Civil Engineering" data-ta="உதவி பேராசிரியர் / சிவில் பொறியியல்">AP / Civil Engineering</span><br>Annapoorana Engineering College, Salem<br><a href="tel:+918072813033" style="color:#fff">+91 80728 13033</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const translatable = document.querySelectorAll('[data-en][data-ta]');
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        langButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const lang = btn.dataset.lang;
+        translatable.forEach(el => {
+          el.textContent = el.dataset[lang];
+        });
+      });
+    });
+
+    const tabs = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabs.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    const courseBtns = document.querySelectorAll('.course-btn');
+    const courseContents = document.querySelectorAll('.course-content');
+    courseBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        courseBtns.forEach(b => b.classList.remove('active'));
+        courseContents.forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.course).classList.add('active');
+      });
+    });
+
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    let currentSlide = 0;
+    function showSlide(index){
+      slides.forEach((s,i)=>s.classList.toggle('active', i===index));
+      dots.forEach((d,i)=>d.classList.toggle('active', i===index));
+      currentSlide = index;
+    }
+    dots.forEach((dot, index)=>dot.addEventListener('click', ()=>showSlide(index)));
+    setInterval(()=>showSlide((currentSlide + 1) % slides.length), 3500);
+  </script>
+</body>
+</html>
